@@ -1,12 +1,14 @@
 package org.taller;
 
+import org.taller.modificadores.IModificador;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class ProductoDAO {
     private List<Producto> producto = new ArrayList<>();
-    ;
     private int id;
 
 
@@ -28,5 +30,8 @@ public class ProductoDAO {
         this.producto.add(producto);
     }
 
+    public void modificar(Producto producto, IModificador modificador, String entrada) {
+        modificador.modificarAtributo(producto, entrada);
+    }
 
 }
