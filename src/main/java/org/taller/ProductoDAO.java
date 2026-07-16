@@ -34,4 +34,8 @@ public class ProductoDAO {
         modificador.modificarAtributo(producto, entrada);
     }
 
+    public void eliminarProducto() {
+        
+    }
+
 }

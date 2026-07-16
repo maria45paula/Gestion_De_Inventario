@@ -7,5 +7,6 @@ public class Main {
 
         ProductoDAO producto1 = new ProductoDAO();
         producto1.agregarProducto();
+
     }
 }
