@@ -1,5 +1,6 @@
 package org.taller.modificadores;
 
+import org.taller.Categoria;
 import org.taller.Producto;
 
 public class ModificadorCategoria implements IModificador{
