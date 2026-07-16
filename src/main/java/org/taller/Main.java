@@ -5,6 +5,7 @@ package org.taller;
 public class Main {
     public static void main(String[] args) {
 
-
+        ProductoDAO producto1 = new ProductoDAO();
+        producto1.agregarProducto();
     }
 }
