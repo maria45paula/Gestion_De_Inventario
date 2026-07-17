@@ -35,7 +35,20 @@ public class ProductoDAO {
     }
 
     public void eliminarProducto() {
-        
+
+    }
+
+    public void buscarProducto(int id) {
+        for (Producto producto1 : producto) {
+            if (producto1.getId() == id) {
+                System.out.println("Nombre:" + producto1.getNombre() + "\n Categoria:" + producto1.getCategoria() + "\n Precio:" + producto1.getPrecio()
+                        + "\n Descripcion:" + producto1.getDescripcion() + "\n Cantidad:" + producto1.getCantidad());
+
+            } else {
+                System.out.println("usuario no encontrado");
+            }
+        }
+
     }
 
 }
