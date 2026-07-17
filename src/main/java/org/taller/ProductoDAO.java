@@ -11,6 +11,9 @@ public class ProductoDAO {
     private List<Producto> producto = new ArrayList<>();
     private int id;
 
+    public List<Producto> getProducto() {
+        return producto;
+    }
 
     public void agregarProducto() {
         Scanner entrada = new Scanner(System.in);
