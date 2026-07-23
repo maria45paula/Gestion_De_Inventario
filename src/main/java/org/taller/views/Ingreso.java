@@ -1,8 +1,8 @@
-package org.taller.views.gestionar_productos;
+package org.taller.views;
 
 import javax.swing.*;
 
-public class Login {
+public class Ingreso {
     private JLabel lblIngreso;
     private JLabel lblUsuario;
     private JTextField txtUsuario;
