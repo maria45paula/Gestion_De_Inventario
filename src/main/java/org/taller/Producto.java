@@ -9,6 +9,7 @@ public class Producto {
     private int cantidad;
 
     public Producto(int id, String nombre, Enum categoria, int precio, String descripcion, int cantidad) {
+        this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
         this.precio = precio;
@@ -62,5 +63,13 @@ public class Producto {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    /*
+     *Aqui formamos el formato csv, sobreescribiendo el medoto que transforma un objeto en texto
+     * */
+    @Override
+    public String toString() {
+        return "%d:%s:%s:%s:%d:%d".formatted(id, nombre, categoria, descripcion, precio, cantidad);
     }
 }

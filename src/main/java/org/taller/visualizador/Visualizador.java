@@ -7,14 +7,14 @@ public class Visualizador {
 
     public void mostrarProductos(ProductoDAO productoDAO) {
 
-        if (productoDAO.getProducto().isEmpty()) {
+        if (productoDAO.getProductos().isEmpty()) {
             System.out.println("No hay productos registrados.");
             return;
         }
 
         System.out.println("===== LISTA DE PRODUCTOS =====");
 
-        for (Producto p : productoDAO.getProducto()) {
+        for (Producto p : productoDAO.getProductos()) {
             System.out.println("ID: " + p.getId());
             System.out.println("Nombre: " + p.getNombre());
             System.out.println("Categoría: " + p.getCategoria());

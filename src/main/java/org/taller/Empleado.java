@@ -3,9 +3,9 @@ package org.taller;
 public class Empleado {
     private String usuario;
     private String contrasena;
-    private int ip;
+    private String ip;
 
-    public Empleado(String usuario, String contrasena, int ip) {
+    public Empleado(String usuario, String contrasena, String ip) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.ip = ip;
@@ -31,7 +31,7 @@ public class Empleado {
         return ip;
     }
 
-    public void setIp(int ip) {
+    public void setIp(String ip) {
         this.ip = ip;
     }
 }

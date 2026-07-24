@@ -4,54 +4,75 @@ import org.taller.modificadores.IModificador;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class ProductoDAO {
-    private List<Producto> producto = new ArrayList<>();
-    private int id;
 
-    public List<Producto> getProducto() {
+    private final List<Producto> productos = new ArrayList<>();
+    private int siguienteId = 1;
+
+    /**
+     * Devuelve una copia de la lista completa de productos.
+     * Se devuelve una copia no la lista original, para que quien la reciba
+     * pueda recorrerla con seguridad, sin riesgo de que otro hilo la
+     * modifique al mismo tiempo.
+     *
+     * @return copia de la lista de productos en el inventario.
+     */
+    public synchronized List<Producto> getProductos() {
+        return new ArrayList<>(productos);
+    }
+
+    /**
+     * Agrega un nuevo producto al inventario, generando su id automáticamente.
+     *
+     * @param nombre      nombre del producto.
+     * @param categoria   categoría del producto.
+     * @param precio      precio del producto.
+     * @param descripcion descripción del producto.
+     * @param cantidad    cantidad disponible.
+     * @return el producto ya creado, con su id asignado.
+     */
+    public synchronized Producto agregarProducto(String nombre, Categoria categoria, int precio, String descripcion, int cantidad) {
+        Producto producto = new Producto(siguienteId, nombre, categoria, precio, descripcion, cantidad);
+        siguienteId++;
+        productos.add(producto);
         return producto;
     }
 
-    public void agregarProducto() {
-        Scanner entrada = new Scanner(System.in);
-        Producto producto = new Producto(0, "0", Categoria.ASEO, 0, "0", 0);
-        System.out.println("Ingresar nombre del Producto:");
-        producto.setNombre(entrada.nextLine());
-        System.out.println("Ingresar la categoria del producto:");
-        Categoria categoria = Categoria.valueOf(entrada.nextLine().trim().toUpperCase());
-        producto.setCategoria(categoria);
-        System.out.println("Ingresar el precio del Producto:");
-        producto.setPrecio(entrada.nextInt());
-        entrada.nextLine();
-        System.out.println("Ingresar descripcion del producto:");
-        producto.setDescripcion(entrada.nextLine());
-        System.out.println("Ingresar la cantidad:");
-        producto.setCantidad(entrada.nextInt());
-        this.producto.add(producto);
+    /**
+     * Modifica un atributo de un producto mediante una interfaz
+     *
+     * @param producto    producto a modificar
+     * @param modificador interfaz de modificacion
+     * @param nuevoDato   nuevo valor a asignar
+     */
+    public synchronized void modificar(Producto producto, IModificador modificador, String nuevoDato) {
+        modificador.modificarAtributo(producto, nuevoDato);
     }
 
-    public void modificar(Producto producto, IModificador modificador, String entrada) {
-        modificador.modificarAtributo(producto, entrada);
+    /**
+     * Elimina un producto del inventario según su id
+     *
+     * @param id id del producto a eliminar
+     * @return true si se pudo eliminar, false si el producto no lo encontro
+     */
+    public synchronized boolean eliminarProducto(int id) {
+        return productos.removeIf(producto -> producto.getId() == id);
     }
 
-    public void eliminarProducto() {
-
-    }
-
-    public void buscarProducto(int id) {
-        for (Producto producto1 : producto) {
-            if (producto1.getId() == id) {
-                System.out.println("Nombre:" + producto1.getNombre() + "\n Categoria:" + producto1.getCategoria() + "\n Precio:" + producto1.getPrecio()
-                        + "\n Descripcion:" + producto1.getDescripcion() + "\n Cantidad:" + producto1.getCantidad());
-
-            } else {
-                System.out.println("usuario no encontrado");
+    /**
+     * Busca un producto por su id.
+     *
+     * @param id id del producto a buscar.
+     * @return un objeto de tipo producto.
+     */
+    public synchronized Producto buscarProducto(int id) {
+        for (Producto producto : productos) {
+            if (producto.getId() == id) {
+                return producto;
             }
         }
-
+        return null;
     }
-
 }
