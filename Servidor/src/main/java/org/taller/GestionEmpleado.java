@@ -18,6 +18,7 @@ public class GestionEmpleado {
     public GestionEmpleado() {
         empleados.add(new Empleado("juan", "clave123"));
         empleados.add(new Empleado("maria", "clave456"));
+        empleados.add(new Empleado("Emmanuel", "clave789"));
     }
 
     /**

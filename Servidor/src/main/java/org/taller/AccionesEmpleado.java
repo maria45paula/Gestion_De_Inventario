@@ -106,7 +106,7 @@ public class AccionesEmpleado implements Runnable {
         if (credencialesValidas) {
             String ipCliente = socket.getInetAddress().getHostAddress();
             RegistradorDeAcciones.registrar("LOGIN", ipCliente, usuario);
-            return "OK;Autenticacion exitosa";
+            return "OK";
         }
         return "ERROR;Usuario o contrasena incorrectos";
     }

@@ -3,6 +3,7 @@ package main.java.org.taller.views;
 import main.java.org.taller.ConexionCliente;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class Ingreso {
     private JLabel lblIngreso;
@@ -15,11 +16,18 @@ public class Ingreso {
 
     public Ingreso(ConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
+        loginConfig();
     }
 
     private void loginConfig() {
         btnLogin.addActionListener(e -> {
+            try {
+                conexionCliente.enviarPeticion("AUTENTICAR;" + txtUsuario.getText() + ";" + txtContrasena.getText());
 
+
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
         });
     }

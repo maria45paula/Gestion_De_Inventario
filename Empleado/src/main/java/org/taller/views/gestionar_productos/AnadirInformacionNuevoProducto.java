@@ -1,7 +1,12 @@
-package org.taller.views.gestionar_productos;
+package main.java.org.taller.views.gestionar_productos;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class AnadirInformacionNuevoProducto extends JDialog {
     private JPanel contentPane;
@@ -51,8 +56,13 @@ public class AnadirInformacionNuevoProducto extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        //AGFREGAR, NOMBRE, CATEGORÍA, PRECIO, DESCRIPCION, CANTIDAD
+
+        try {
+            conexionCliente.enviarPeticion("AGREGAR;" + textNombre.getText() + ";" + textPrecio.getText() + ";" + textDescripcion.getText() + ";");
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     private void onCancel() {
