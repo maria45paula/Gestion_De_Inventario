@@ -1,5 +1,7 @@
 package main.java.org.taller.views.gestionar_productos;
 
+import main.java.org.taller.ConexionCliente;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,8 +23,10 @@ public class AnadirInformacionNuevoProducto extends JDialog {
     private JTextField textDescripcion;
     private JLabel lblCantidadDisponible;
     private JTextField textCantidadDisponible;
+    private ConexionCliente conexionCliente;
 
-    public AnadirInformacionNuevoProducto() {
+    public AnadirInformacionNuevoProducto(ConexionCliente conexionCliente) {
+        this.conexionCliente = conexionCliente;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);

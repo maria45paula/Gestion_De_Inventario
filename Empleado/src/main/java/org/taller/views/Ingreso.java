@@ -23,6 +23,13 @@ public class Ingreso {
         btnLogin.addActionListener(e -> {
             try {
                 conexionCliente.enviarPeticion("AUTENTICAR;" + txtUsuario.getText() + ";" + txtContrasena.getText());
+                String mensaje = conexionCliente.getUltimoMensaje();
+
+                if (mensaje.equals("OK")) {
+                    //Lógica para redireccionar
+                } else {
+
+                }
 
 
             } catch (IOException ex) {

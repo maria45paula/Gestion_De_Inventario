@@ -10,7 +10,6 @@ import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.KeyStore;
-import java.util.function.Consumer;
 
 /**
  * Encapsula la conexión SSL persistente con el servidor de inventario.
@@ -26,11 +25,12 @@ public class ConexionCliente {
     private final int puerto;
     private final String rutaTruststore;
     private final String claveTruststore;
+    private String ultimoMensaje;
 
     private SSLSocket socket;
     private DataOutputStream salida;
     private DataInputStream entrada;
-    private Consumer<String> oyenteMensajes;
+
 
     /**
      * @param host            dirección del servidor.
@@ -39,26 +39,13 @@ public class ConexionCliente {
      * @param claveTruststore contraseña del truststore.
      */
     public ConexionCliente(String host, int puerto, String rutaTruststore, String claveTruststore) {
+        this.ultimoMensaje = null;
         this.host = host;
         this.puerto = puerto;
         this.rutaTruststore = rutaTruststore;
         this.claveTruststore = claveTruststore;
     }
 
-    /**
-     * Registra quién debe enterarse de cada mensaje que llegue del servidor
-     * (tanto respuestas como notificaciones). Pensado para que una ventana
-     * de Swing pueda reaccionar (mostrar un error, cerrar el login, etc.)
-     * en vez de solo imprimir en consola.
-     * Importante: este callback se ejecuta en el hilo de escucha, NO en el
-     * hilo de Swing — dentro de él hay que usar SwingUtilities.invokeLater(...)
-     * para tocar cualquier componente de la interfaz.
-     *
-     * @param oyente función que recibe cada mensaje tal cual llega (String).
-     */
-    public void setOyenteMensajes(Consumer<String> oyente) {
-        this.oyenteMensajes = oyente;
-    }
 
     /**
      * Abre la conexión SSL con el servidor y arranca el hilo de escucha.
@@ -76,28 +63,6 @@ public class ConexionCliente {
         hiloEscucha.start();
     }
 
-    /**
-     * Corre en un hilo aparte durante toda la sesión: espera mensajes
-     * del servidor y los muestra apenas llegan, sin bloquear al hilo
-     * principal (el que atiende al usuario escribiendo peticiones).
-     */
-    private void escucharMensajes() {
-        try {
-            while (true) {
-                String mensaje = entrada.readUTF();
-
-                if (oyenteMensajes != null) {
-                    oyenteMensajes.accept(mensaje);
-                } else {
-                    mostrarEnConsola(mensaje);
-                }
-            }
-        } catch (EOFException finDeConexion) {
-            avisarDesconexion("El servidor cerro la conexion.");
-        } catch (IOException e) {
-            avisarDesconexion("Se perdio la conexion con el servidor: " + e.getMessage());
-        }
-    }
 
     private void mostrarEnConsola(String mensaje) {
         if (mensaje.startsWith("NOTIFICACION;")) {
@@ -110,13 +75,29 @@ public class ConexionCliente {
         }
     }
 
-    private void avisarDesconexion(String motivo) {
-        if (oyenteMensajes != null) {
-            oyenteMensajes.accept("ERROR;" + motivo);
-        } else {
-            System.out.println();
-            System.out.println(motivo);
+    /**
+     * Recoge los mensajes mandados desde el servidor
+     */
+    private void escucharMensajes() {
+        try {
+            while (true) {
+                String mensaje = entrada.readUTF();
+                ultimoMensaje = mensaje;
+                mostrarEnConsola(mensaje);
+            }
+        } catch (EOFException e) {
+            mostrarEnConsola("El servidor cerró la conexión.");
+        } catch (IOException e) {
+            mostrarEnConsola("Se perdió la conexión con el servidor: " + e.getMessage());
         }
+    }
+
+    private void avisarDesconexion(String motivo) {
+        mostrarEnConsola("ERROR; " + motivo);
+    }
+
+    public String getUltimoMensaje() {
+        return ultimoMensaje;
     }
 
     /**
