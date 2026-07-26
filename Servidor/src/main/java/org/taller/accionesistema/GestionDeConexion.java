@@ -1,4 +1,4 @@
-package src.main.java.org.taller.accionesistema;
+package main.java.org.taller.accionesistema;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package org.taller;
+package main.java.org.taller;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
@@ -126,7 +126,7 @@ public class ConexionCliente {
      * @param peticion texto de la petición, formato "OPERACION;dato1;dato2;..."
      * @throws IOException si falla el envío.
      */
-    public enviarPeticion(String peticion) throws IOException {
+    public void enviarPeticion(String peticion) throws IOException {
         salida.writeUTF(peticion);
         salida.flush();
     }

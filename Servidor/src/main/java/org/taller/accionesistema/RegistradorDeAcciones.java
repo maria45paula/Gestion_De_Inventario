@@ -1,4 +1,4 @@
-package org.taller.accionesistema;
+package main.java.org.taller.accionesistema;
 
 import java.io.FileWriter;
 import java.io.IOException;

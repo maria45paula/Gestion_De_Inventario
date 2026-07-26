@@ -1,11 +1,11 @@
-package src.main.java.org.taller.servidor;
+package main.java.org.taller.servidor;
 
 
-import org.taller.ProductoDAO;
-import org.taller.accionesistema.RegistradorDeAcciones;
-import src.main.java.org.taller.AccionesEmpleado;
-import src.main.java.org.taller.GestionEmpleado;
-import src.main.java.org.taller.accionesistema.GestionDeConexion;
+import main.java.org.taller.AccionesEmpleado;
+import main.java.org.taller.GestionEmpleado;
+import main.java.org.taller.ProductoDAO;
+import main.java.org.taller.accionesistema.GestionDeConexion;
+import main.java.org.taller.accionesistema.RegistradorDeAcciones;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;

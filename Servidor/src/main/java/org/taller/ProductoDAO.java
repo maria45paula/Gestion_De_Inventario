@@ -1,6 +1,6 @@
-package org.taller;
+package main.java.org.taller;
 
-import org.taller.modificadores.IModificador;
+import main.java.org.taller.modificadores.IModificador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class ProductoDAO {
      * @param cantidad    cantidad disponible.
      * @return el producto ya creado, con su id asignado.
      */
-    public synchronized Producto agregarProducto(String nombre, Categoria categoria, int precio, String descripcion, int cantidad) {
+    public synchronized Producto agregarProducto(String nombre, org.taller.Categoria categoria, int precio, String descripcion, int cantidad) {
         Producto producto = new Producto(siguienteId, nombre, categoria, precio, descripcion, cantidad);
         siguienteId++;
         productos.add(producto);

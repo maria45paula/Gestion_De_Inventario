@@ -1,4 +1,4 @@
-package src.main.java.org.taller;
+package main.java.org.taller;
 
 import src.main.java.org.taller.servidor.Servidor;
 

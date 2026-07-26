@@ -1,4 +1,4 @@
-package src.main.java.org.taller;
+package main.java.org.taller;
 
 import java.util.ArrayList;
 import java.util.List;

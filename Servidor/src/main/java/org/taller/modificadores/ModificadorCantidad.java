@@ -1,9 +1,9 @@
-package org.taller.modificadores;
+package main.java.org.taller.modificadores;
 
-import org.taller.Producto;
+
+import main.java.org.taller.Producto;
 
 public class ModificadorCantidad implements IModificador {
-
 
 
     @Override

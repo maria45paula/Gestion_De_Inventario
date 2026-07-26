@@ -1,4 +1,4 @@
-package src.main.java.org.taller;
+package main.java.org.taller;
 
 public class Empleado {
     private String usuario;

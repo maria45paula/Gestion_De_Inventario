@@ -1,6 +1,6 @@
-package org.taller.accionesistema;
+package main.java.org.taller.accionesistema;
 
-import org.taller.Producto;
+import main.java.org.taller.Producto;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

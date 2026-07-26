@@ -1,12 +1,10 @@
-package src.main.java.org.taller;
+package main.java.org.taller;
 
+import main.java.org.taller.accionesistema.ExportadorCSV;
+import main.java.org.taller.accionesistema.GestionDeConexion;
+import main.java.org.taller.accionesistema.RegistradorDeAcciones;
+import main.java.org.taller.modificadores.IModificador;
 import org.taller.Categoria;
-import org.taller.Producto;
-import org.taller.ProductoDAO;
-import org.taller.accionesistema.ExportadorCSV;
-import org.taller.accionesistema.RegistradorDeAcciones;
-import org.taller.modificadores.IModificador;
-import src.main.java.org.taller.accionesistema.GestionDeConexion;
 
 import java.io.BufferedReader;
 import java.io.IOException;

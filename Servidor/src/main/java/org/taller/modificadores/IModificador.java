@@ -1,10 +1,10 @@
-package org.taller.modificadores;
+package main.java.org.taller.modificadores;
 
-import org.taller.Producto;
+
+import main.java.org.taller.Producto;
 
 public interface IModificador {
 
 
-
-     void modificarAtributo(Producto producto,String nuevoDato);
+    void modificarAtributo(Producto producto, String nuevoDato);
 }

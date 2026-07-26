@@ -1,4 +1,4 @@
-package org.taller;
+package main.java.org.taller;
 
 public class Producto {
     private int id;
