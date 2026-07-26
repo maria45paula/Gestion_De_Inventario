@@ -1,4 +1,6 @@
-package org.taller;
+package org.taller.accionesistema;
+
+import org.taller.Producto;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

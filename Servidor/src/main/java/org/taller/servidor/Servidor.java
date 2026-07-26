@@ -1,8 +1,11 @@
-package org.taller.servidor;
+package src.main.java.org.taller.servidor;
 
 
 import org.taller.ProductoDAO;
-import org.taller.RegistradorDeAcciones;
+import org.taller.accionesistema.RegistradorDeAcciones;
+import src.main.java.org.taller.AccionesEmpleado;
+import src.main.java.org.taller.GestionEmpleado;
+import src.main.java.org.taller.accionesistema.GestionDeConexion;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -24,6 +27,9 @@ public class Servidor {
     private final String claveKeystore;
     private final ProductoDAO productoDAO = new ProductoDAO();
     private final RegistradorDeAcciones registrarAccion = new RegistradorDeAcciones("acciones.log");
+    private final GestionDeConexion gestorConexiones = new GestionDeConexion();
+    private final GestionEmpleado gestorEmpleados = new GestionEmpleado();
+
 
     /**
      * Crea un servidor SSL que escuchará en el puerto indicado.
@@ -53,7 +59,7 @@ public class Servidor {
                     Socket clienteSocket = serverSocket.accept();
                     System.out.println("Cliente conectado: " + clienteSocket.getInetAddress().getHostAddress());
 
-                    org.taller.servidor.AccionesEmpleado accion = new org.taller.servidor.AccionesEmpleado(clienteSocket, productoDAO, registrarAccion);
+                    AccionesEmpleado accion = new AccionesEmpleado(clienteSocket, productoDAO, registrarAccion, gestorConexiones, gestorEmpleados);
                     Thread hilo = new Thread(accion);
                     hilo.start();
                 }

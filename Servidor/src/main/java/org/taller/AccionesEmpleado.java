@@ -1,11 +1,12 @@
-package org.taller.servidor;
+package src.main.java.org.taller;
 
 import org.taller.Categoria;
-import org.taller.ExportadorCSV;
 import org.taller.Producto;
 import org.taller.ProductoDAO;
-import org.taller.RegistradorDeAcciones;
+import org.taller.accionesistema.ExportadorCSV;
+import org.taller.accionesistema.RegistradorDeAcciones;
 import org.taller.modificadores.IModificador;
+import src.main.java.org.taller.accionesistema.GestionDeConexion;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,16 +26,21 @@ public class AccionesEmpleado implements Runnable {
     private final Socket socket;
     private final ProductoDAO productoDAO;
     private final RegistradorDeAcciones registrarAccion;
+    private final GestionDeConexion gestorConexiones;
+    private final GestionEmpleado gestorEmpleados;
+
 
     /**
      * @param socket          conexión con el cliente.
      * @param productoDAO     inventario compartido entre todos los clientes.
      * @param registrarAccion registrador de auditoría compartido entre todos los clientes.
      */
-    public AccionesEmpleado(Socket socket, ProductoDAO productoDAO, RegistradorDeAcciones registrarAccion) {
+    public AccionesEmpleado(Socket socket, ProductoDAO productoDAO, RegistradorDeAcciones registrarAccion, GestionDeConexion gestorConexiones, GestionEmpleado gestorEmpleados) {
         this.socket = socket;
         this.productoDAO = productoDAO;
         this.registrarAccion = registrarAccion;
+        this.gestorConexiones = gestorConexiones;
+        this.gestorEmpleados = gestorEmpleados;
     }
 
     @Override
@@ -66,23 +72,45 @@ public class AccionesEmpleado implements Runnable {
      * @return texto de respuesta, formato "OK;..." o "ERROR;..."
      */
     private String procesarPeticion(String peticion) {
-        String[] partes = peticion.split(";");
-        String operacion = partes[0].toUpperCase();
+        String[] solicitud = peticion.split(";");
+        String operacion = solicitud[0].toUpperCase();
 
         try {
             return switch (operacion) {
-                case "AGREGAR" -> agregar(partes);
-                case "BUSCAR" -> buscar(partes);
-                case "ELIMINAR" -> eliminar(partes);
-                case "MODIFICAR" -> modificar(partes);
+                case "AUTENTICAR" -> autenticar(solicitud);
+                case "AGREGAR" -> agregar(solicitud);
+                case "BUSCAR" -> buscar(solicitud);
+                case "ELIMINAR" -> eliminar(solicitud);
+                case "MODIFICAR" -> modificar(solicitud);
                 case "LISTAR" -> listar();
                 case "EXPORTAR" -> exportarInventario();
                 case "EXPORTARLOGS" -> exportarAuditoria();
-                default -> "ERROR;Operacion desconocida";
+                default -> "ERROR Operacion desconocida";
             };
         } catch (Exception e) {
-            return "ERROR;" + e.getMessage();
+            return "ERROR " + e.getMessage();
         }
+    }
+
+    /**
+     * Valida las credenciales de un empleado.
+     * Protocolo esperado: "AUTENTICAR;usuario;contrasena"
+     */
+    private String autenticar(String[] camposPeticion) {
+        if (camposPeticion.length < 3) {
+            return "ERROR;Formato invalido, use AUTENTICAR;usuario;contrasena";
+        }
+
+        String usuario = camposPeticion[1];
+        String contrasena = camposPeticion[2];
+        boolean credencialesValidas = gestorEmpleados.autenticar(usuario, contrasena);
+
+        if (credencialesValidas) {
+            String ipCliente = socket.getInetAddress().getHostAddress();
+            RegistradorDeAcciones.registrar("LOGIN", ipCliente, usuario);
+            return "OK;Autenticacion exitosa";
+        }
+        return "ERROR;Usuario o contrasena incorrectos";
     }
 
     private String agregar(String[] partes) {

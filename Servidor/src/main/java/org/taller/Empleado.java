@@ -1,14 +1,12 @@
-package org.taller;
+package src.main.java.org.taller;
 
 public class Empleado {
     private String usuario;
     private String contrasena;
-    private String ip;
 
-    public Empleado(String usuario, String contrasena, String ip) {
+    public Empleado(String usuario, String contrasena) {
         this.usuario = usuario;
         this.contrasena = contrasena;
-        this.ip = ip;
     }
 
     public String getUsuario() {
@@ -27,11 +25,4 @@ public class Empleado {
         this.contrasena = contrasena;
     }
 
-    public int getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
 }

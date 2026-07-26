@@ -11,7 +11,6 @@ public class Main {
         System.out.println("Introduzca la contraseña: ");
         String contrasena = scanner.nextLine();
         if (contrasena.equals("12345678")) {
-            Empleado empleado = new Empleado("Empleado", "12345678", "9876544");
 
         } else {
             System.out.println("Acceso denegado");

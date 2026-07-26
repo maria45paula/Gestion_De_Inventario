@@ -1,6 +1,5 @@
-package org.taller.visualizador;
+package src.main.java.org.taller.visualizador;
 
-import org.taller.Producto;
 import org.taller.ProductoDAO;
 
 public class Visualizador {
@@ -14,7 +13,7 @@ public class Visualizador {
 
         System.out.println("===== LISTA DE PRODUCTOS =====");
 
-        for (Producto p : productoDAO.getProductos()) {
+       /* for (Producto p : productoDAO.getProductos()) {
             System.out.println("ID: " + p.getId());
             System.out.println("Nombre: " + p.getNombre());
             System.out.println("Categoría: " + p.getCategoria());
@@ -22,6 +21,6 @@ public class Visualizador {
             System.out.println("Descripción: " + p.getDescripcion());
             System.out.println("Cantidad: " + p.getCantidad());
             System.out.println("--------------------------------");
-        }
+        }*/
     }
 }

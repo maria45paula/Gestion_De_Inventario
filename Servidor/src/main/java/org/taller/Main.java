@@ -1,11 +1,15 @@
-package org.taller;
+package src.main.java.org.taller;
 
-import org.taller.servidor.Servidor;
+import src.main.java.org.taller.servidor.Servidor;
 
-public class MainServidor {
+public class Main {
+
+    /**
+     * Punto de entrada del servidor de inventario.
+     */
 
     public static void main(String[] args) {
-        int puerto = 5000;
+        int puerto = 9090;
         String rutaKeystore = "servidor.p12";
         String claveKeystore = "claveSegura123";
 
@@ -13,3 +17,4 @@ public class MainServidor {
         servidor.iniciar();
     }
 }
+
