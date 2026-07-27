@@ -1,6 +1,9 @@
 package main.java.org.taller.views.gestionar_productos;
 
 import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.validadores.IValidador;
+import main.java.org.taller.validadores.Validador;
+import main.java.org.taller.views.Error_;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,24 +12,26 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AnadirInformacionNuevoProducto extends JDialog {
+public class AnadirInformacionNuevoProduct extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JLabel lblIngresarDatos;
-    private JLabel lblNombre;
     private JTextField textNombre;
-    private JLabel lblPrecio;
+    private JComboBox cmbCategorias;
     private JTextField textPrecio;
-    private JLabel lblDescripcion;
     private JTextField textDescripcion;
-    private JLabel lblCantidadDisponible;
     private JTextField textCantidadDisponible;
+    private IValidador validador;
     private ConexionCliente conexionCliente;
 
-    public AnadirInformacionNuevoProducto(ConexionCliente conexionCliente) {
+    public AnadirInformacionNuevoProduct(ConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
+        validador = new Validador();
+        configCmb();
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -63,21 +68,47 @@ public class AnadirInformacionNuevoProducto extends JDialog {
         //AGFREGAR, NOMBRE, CATEGORÍA, PRECIO, DESCRIPCION, CANTIDAD
 
         try {
-            conexionCliente.enviarPeticion("AGREGAR;" + textNombre.getText() + ";" + textPrecio.getText() + ";" + textDescripcion.getText() + ";");
+            if (validador.validarString(textNombre.getText()) && validador.validarInt(textPrecio.getText()) &&
+                    validador.validarString(textDescripcion.getText()) && validador.validarInt(textCantidadDisponible.getText())) {
+                String categoria = cmbCategorias.getSelectedItem().toString();
+
+                conexionCliente.enviarPeticion("AGREGAR;" + textNombre.getText() + ";" + categoria + ";" + textPrecio.getText() + ";" + textDescripcion.getText() + ";");
+            } else {
+
+                System.out.println("Hola");
+                Error_ error = new Error_();
+                error.setVisible(true);
+
+                JOptionPane.showMessageDialog(null, "Profe, ¿cómo se atreve a intentar dañar el código? :( \n Y los datos están malos, de paso");
+
+
+            }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
+    private void configCmb() {
+        List<String> categorias = new ArrayList<>();
+        categorias.add("ASEO");
+        categorias.add("IMPLEMENTOS DE COCINA");
+        categorias.add("ALIMENTOS");
+        categorias.add("VEGETALES");
+        categorias.add("CARNES");
+        categorias.add("DULCES");
+
+        categorias.stream().forEach(e -> cmbCategorias.addItem(e));
+    }
+
     public static void main(String[] args) {
-        AnadirInformacionNuevoProducto dialog = new AnadirInformacionNuevoProducto();
+        AnadirInformacionNuevoProduct dialog = new AnadirInformacionNuevoProduct(new ConexionCliente("a", 13, "b", "c"));
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
     }
+
 }

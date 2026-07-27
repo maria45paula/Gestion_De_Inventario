@@ -57,6 +57,7 @@ public class ClientePrincipal {
 
             try {
                 conexion.enviarPeticion(peticion);
+                //AnadirInformacionNuevoProducto nuevoProducto = new AnadirInformacionNuevoProducto(conexion);
             } catch (IOException e) {
                 System.out.println("Error al enviar la peticion: " + e.getMessage());
                 break;
