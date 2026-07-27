@@ -1,9 +1,11 @@
-package main.java.org.taller;
+package main.java.org.taller.gestionempleados;
+
+import main.java.org.taller.Empleado;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestionEmpleado {
+public class GestionEmpleado implements IGestorEmpleados {
 
     /**
      * Guarda la lista de empleados autorizados y valida sus credenciales

@@ -1,6 +1,8 @@
 package main.java.org.taller;
 
 
+import main.java.org.taller.conexion.ConexionCliente;
+import main.java.org.taller.validadores.Validador;
 import main.java.org.taller.views.gestionar_productos.AnadirInformacionNuevoProduct;
 import main.java.org.taller.views.gestionar_productos.EditarInformacionn;
 import main.java.org.taller.views.gestionar_productos.EliminarInformacionn;
@@ -61,7 +63,7 @@ public class ClientePrincipal {
 
             try {
                 conexion.enviarPeticion(peticion);
-                AnadirInformacionNuevoProduct nuevoProducto = new AnadirInformacionNuevoProduct(conexion);
+                AnadirInformacionNuevoProduct nuevoProducto = new AnadirInformacionNuevoProduct(conexion, new Validador());
                 EditarInformacionn editarProducto = new EditarInformacionn(conexion);
                 EliminarInformacionn eliminarProducto = new EliminarInformacionn(conexion);
             } catch (IOException e) {

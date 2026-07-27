@@ -1,12 +1,14 @@
-package main.java.org.taller;
+package main.java.org.taller.accionesproducto;
 
+import main.java.org.taller.Producto;
+import main.java.org.taller.enums.Categoria;
 import main.java.org.taller.modificadores.IModificador;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductoDAO {
+public class ProductoDAO implements IProductoAccionado {
 
     private final List<Producto> productos = new ArrayList<>();
     private int siguienteId = 1;
@@ -33,7 +35,7 @@ public class ProductoDAO {
      * @param cantidad    cantidad disponible.
      * @return el producto ya creado, con su id asignado.
      */
-    public synchronized Producto agregarProducto(String nombre, org.taller.Categoria categoria, int precio, String descripcion, int cantidad) {
+    public synchronized Producto agregarProducto(String nombre, Categoria categoria, int precio, String descripcion, int cantidad) {
         Producto producto = new Producto(siguienteId, nombre, categoria, precio, descripcion, cantidad);
         siguienteId++;
         productos.add(producto);

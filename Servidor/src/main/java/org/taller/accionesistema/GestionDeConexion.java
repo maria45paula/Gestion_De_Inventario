@@ -14,7 +14,7 @@ import java.util.List;
  * metodos son synchronized sobre la misma instancia, solo un hilo a la
  * vez puede registrar, eliminar o recorrer la lista de clientes.
  */
-public class GestionDeConexion {
+public class GestionDeConexion implements IGestorConexion {
 
 
     private final List<DataOutputStream> clientesConectados = new ArrayList<>();

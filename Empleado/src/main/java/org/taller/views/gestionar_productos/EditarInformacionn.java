@@ -1,11 +1,16 @@
 package main.java.org.taller.views.gestionar_productos;
 
-import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.conexion.ConexionCliente;
+import main.java.org.taller.conexion.IConexionCliente;
 import main.java.org.taller.validadores.IValidador;
 import main.java.org.taller.views.Error_;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class EditarInformacionn extends JDialog {
@@ -22,10 +27,10 @@ public class EditarInformacionn extends JDialog {
     private JRadioButton RBCategoria;
     private JLabel lblNuevoDato;
     private JTextField txtNuevoDato;
-    private ConexionCliente conexionCliente;
+    private IConexionCliente conexionCliente;
     private IValidador validador;
 
-    public EditarInformacionn(ConexionCliente conexionCliente) {
+    public EditarInformacionn(IConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
         setContentPane(contentPane);
         setModal(true);

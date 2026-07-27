@@ -1,11 +1,16 @@
 package main.java.org.taller.views.gestionar_productos;
 
-import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.conexion.ConexionCliente;
+import main.java.org.taller.conexion.IConexionCliente;
 import main.java.org.taller.validadores.IValidador;
 import main.java.org.taller.views.Error_;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class EliminarInformacionn extends JDialog {
@@ -14,10 +19,10 @@ public class EliminarInformacionn extends JDialog {
     private JButton buttonCancel;
     private JLabel lblIDProductoEliminar;
     private JTextField textIDProductoEliminar;
-    private ConexionCliente conexionCliente;
+    private IConexionCliente conexionCliente;
     private IValidador validador;
 
-    public EliminarInformacionn( ConexionCliente conexionCliente) {
+    public EliminarInformacionn(IConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
         setContentPane(contentPane);
         setModal(true);
@@ -58,7 +63,7 @@ public class EliminarInformacionn extends JDialog {
 // En el momento que necesites saber cuál está marcado:
 
 
-                conexionCliente.enviarPeticion("ELIMINAR;" + textIDProductoEliminar.getText() );
+                conexionCliente.enviarPeticion("ELIMINAR;" + textIDProductoEliminar.getText());
             } else {
 
                 Error_ error = new Error_();

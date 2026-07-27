@@ -1,10 +1,12 @@
 package main.java.org.taller;
 
 import main.java.org.taller.accionesistema.ExportadorCSV;
-import main.java.org.taller.accionesistema.GestionDeConexion;
+import main.java.org.taller.accionesistema.IGestorConexion;
 import main.java.org.taller.accionesistema.RegistradorDeAcciones;
+import main.java.org.taller.accionesproducto.IProductoAccionado;
+import main.java.org.taller.enums.Categoria;
+import main.java.org.taller.gestionempleados.IGestorEmpleados;
 import main.java.org.taller.modificadores.IModificador;
-import org.taller.Categoria;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,10 +24,10 @@ import java.util.List;
 public class AccionesEmpleado implements Runnable {
 
     private final Socket socket;
-    private final ProductoDAO productoDAO;
+    private final IProductoAccionado productoDAO;
     private final RegistradorDeAcciones registrarAccion;
-    private final GestionDeConexion gestorConexiones;
-    private final GestionEmpleado gestorEmpleados;
+    private final IGestorConexion gestorConexiones;
+    private final IGestorEmpleados gestorEmpleados;
 
 
     /**
@@ -33,7 +35,7 @@ public class AccionesEmpleado implements Runnable {
      * @param productoDAO     inventario compartido entre todos los clientes.
      * @param registrarAccion registrador de auditoría compartido entre todos los clientes.
      */
-    public AccionesEmpleado(Socket socket, ProductoDAO productoDAO, RegistradorDeAcciones registrarAccion, GestionDeConexion gestorConexiones, GestionEmpleado gestorEmpleados) {
+    public AccionesEmpleado(Socket socket, IProductoAccionado productoDAO, RegistradorDeAcciones registrarAccion, IGestorConexion gestorConexiones, IGestorEmpleados gestorEmpleados) {
         this.socket = socket;
         this.productoDAO = productoDAO;
         this.registrarAccion = registrarAccion;

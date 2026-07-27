@@ -1,6 +1,7 @@
 package main.java.org.taller.views.gestionar_productos;
 
-import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.conexion.ConexionCliente;
+import main.java.org.taller.conexion.IConexionCliente;
 import main.java.org.taller.validadores.IValidador;
 import main.java.org.taller.validadores.Validador;
 import main.java.org.taller.views.Error_;
@@ -25,11 +26,11 @@ public class AnadirInformacionNuevoProduct extends JDialog {
     private JTextField textDescripcion;
     private JTextField textCantidadDisponible;
     private IValidador validador;
-    private ConexionCliente conexionCliente;
+    private IConexionCliente conexionCliente;
 
-    public AnadirInformacionNuevoProduct(ConexionCliente conexionCliente) {
+    public AnadirInformacionNuevoProduct(IConexionCliente conexionCliente, IValidador validador) {
         this.conexionCliente = conexionCliente;
-        validador = new Validador();
+        this.validador = validador;
         configCmb();
 
         setContentPane(contentPane);
@@ -105,7 +106,7 @@ public class AnadirInformacionNuevoProduct extends JDialog {
     }
 
     public static void main(String[] args) {
-        AnadirInformacionNuevoProduct dialog = new AnadirInformacionNuevoProduct(new ConexionCliente("a", 13, "b", "c"));
+        AnadirInformacionNuevoProduct dialog = new AnadirInformacionNuevoProduct(new ConexionCliente("a", 13, "b", "c"), new Validador());
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

@@ -1,7 +1,7 @@
 package main.java.org.taller.modificadores;
 
 import main.java.org.taller.Producto;
-import org.taller.Categoria;
+import main.java.org.taller.enums.Categoria;
 
 
 public class ModificadorCategoria implements IModificador {

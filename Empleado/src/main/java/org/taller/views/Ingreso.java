@@ -1,6 +1,6 @@
 package main.java.org.taller.views;
 
-import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.conexion.IConexionCliente;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +13,11 @@ public class Ingreso {
     private JLabel lblContrasena;
     private JPasswordField txtContrasena;
     private JButton btnLogin;
-    private ConexionCliente conexionCliente;
+    private IConexionCliente conexionCliente;
     Window currentWindow = SwingUtilities.getWindowAncestor(login);
 
 
-    public Ingreso(ConexionCliente conexionCliente) {
+    public Ingreso(IConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
         loginConfig();
     }

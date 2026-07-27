@@ -2,10 +2,12 @@ package main.java.org.taller.servidor;
 
 
 import main.java.org.taller.AccionesEmpleado;
-import main.java.org.taller.GestionEmpleado;
-import main.java.org.taller.ProductoDAO;
 import main.java.org.taller.accionesistema.GestionDeConexion;
+import main.java.org.taller.accionesistema.IGestorConexion;
 import main.java.org.taller.accionesistema.RegistradorDeAcciones;
+import main.java.org.taller.accionesproducto.IProductoAccionado;
+import main.java.org.taller.accionesproducto.ProductoDAO;
+import main.java.org.taller.gestionempleados.GestionEmpleado;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -20,14 +22,14 @@ import java.security.KeyStore;
  * Acepta conexiones cifradas de clientes y crea un hilo por cada uno,
  * de forma que varios clientes puedan trabajar al mismo tiempo.
  */
-public class Servidor {
+public class Servidor implements IServidor {
 
     private final int puerto;
     private final String rutaKeystore;
     private final String claveKeystore;
-    private final ProductoDAO productoDAO = new ProductoDAO();
+    private final IProductoAccionado productoDAO = new ProductoDAO();
     private final RegistradorDeAcciones registrarAccion = new RegistradorDeAcciones("acciones.log");
-    private final GestionDeConexion gestorConexiones = new GestionDeConexion();
+    private final IGestorConexion gestorConexiones = new GestionDeConexion();
     private final GestionEmpleado gestorEmpleados = new GestionEmpleado();
 
 

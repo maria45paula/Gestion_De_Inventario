@@ -1,6 +1,7 @@
 package main.java.org.taller;
 
 
+import main.java.org.taller.servidor.IServidor;
 import main.java.org.taller.servidor.Servidor;
 
 public class Main {
@@ -14,7 +15,7 @@ public class Main {
         String rutaKeystore = "servidor.p12";
         String claveKeystore = "claveSegura123";
 
-        Servidor servidor = new Servidor(puerto, rutaKeystore, claveKeystore);
+        IServidor servidor = new Servidor(puerto, rutaKeystore, claveKeystore);
         servidor.iniciar();
     }
 }

@@ -1,6 +1,7 @@
 package main.java.org.taller.views;
 
-import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.conexion.IConexionCliente;
+import main.java.org.taller.validadores.Validador;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,15 +13,15 @@ public class VentanaPrincipal extends JDialog {
     private JButton gestionarPersonalButton;
     private JButton generarInformesButton;
     private JPanel contentPane;
-    private ConexionCliente conexionCliente;
+    private IConexionCliente conexionCliente;
 
-    public VentanaPrincipal(ConexionCliente conexionCliente) {
+    public VentanaPrincipal(IConexionCliente conexionCliente) {
 
-         this.conexionCliente = conexionCliente;
-         setContentPane(panelPrincipal);
-         setModal(true);
+        this.conexionCliente = conexionCliente;
+        setContentPane(panelPrincipal);
+        setModal(true);
 
-       gestionarInventarioButton.addActionListener(new ActionListener() {
+        gestionarInventarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 VentanaInventario ventanaInventario = new VentanaInventario(conexionCliente);
@@ -51,7 +52,7 @@ public class VentanaPrincipal extends JDialog {
                             JOptionPane.INFORMATION_MESSAGE
                     );
 
-                    VentanaPersonal ventanaPersonal = new VentanaPersonal(conexionCliente);
+                    VentanaPersonal ventanaPersonal = new VentanaPersonal(conexionCliente, new Validador());
                     ventanaPersonal.pack();
                     ventanaPersonal.setLocationRelativeTo(VentanaPrincipal.this);
                     ventanaPersonal.setVisible(true);

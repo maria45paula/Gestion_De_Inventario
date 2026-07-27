@@ -1,4 +1,4 @@
-package main.java.org.taller;
+package main.java.org.taller.conexion;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
@@ -19,7 +19,7 @@ import java.security.KeyStore;
  * (tanto respuestas a lo que se pidió, como notificaciones de
  * cambios hechos por otros empleados).
  */
-public class ConexionCliente {
+public class ConexionCliente implements IConexionCliente {
 
     private final String host;
     private final int puerto;
