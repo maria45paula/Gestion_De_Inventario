@@ -1,6 +1,7 @@
-package org.taller.eliminador;
+package main.java.org.taller.eliminador;
 
-import org.taller.Producto;
+
+import main.java.org.taller.Producto;
 
 import java.util.ArrayList;
 import java.util.Scanner;

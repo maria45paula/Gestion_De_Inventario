@@ -1,6 +1,7 @@
-package src.main.java.org.taller.visualizador;
+package main.java.org.taller.visualizador;
 
-import org.taller.ProductoDAO;
+
+import main.java.org.taller.ProductoDAO;
 
 public class Visualizador {
 

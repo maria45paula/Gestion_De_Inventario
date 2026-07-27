@@ -1,6 +1,7 @@
 package main.java.org.taller;
 
-import src.main.java.org.taller.servidor.Servidor;
+
+import main.java.org.taller.servidor.Servidor;
 
 public class Main {
 
