@@ -1,36 +1,39 @@
 package main.java.org.taller.views;
 
-import javax.swing.*;
+import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.views.gestionar_productos.AnadirInformacionNuevoProduct;
+import main.java.org.taller.views.gestionar_productos.EditarInformacionn;
+import main.java.org.taller.views.gestionar_productos.EliminarInformacionn;
 
-// import main.java.org.taller.views.gestionar_productos.EliminarInformacion;
-// import main.java.org.taller.views.gestionar_productos.EditarInformacion.EditarInformacion;
+import javax.swing.*;
 
 public class VentanaInventario extends JDialog {
     private JPanel contentPane;
     private JButton eliminarProductoButton;
     private JButton editarProductoButton;
     private JButton agregarProductoButton;
+    private ConexionCliente conexion;
 
-    /** public VentanaInventario(ConexionCliente conexionCliente) {
-        setContentPane(contentPane);
-        setModal(true);
+     public VentanaInventario(ConexionCliente conexionCliente) {
+         this.conexion=conexionCliente;
+         setContentPane(contentPane);
+         setModal(true);
 
-        eliminarProductoButton.addActionListener(e -> {
-            EliminarInformacion ventana = new EliminarInformacion();
-            ventana.setVisible(true);
-        });
+         eliminarProductoButton.addActionListener(e -> {
+             EliminarInformacionn ventana = new EliminarInformacionn(conexion);
+             ventana.setVisible(true);
+         });
 
-        editarProductoButton.addActionListener(e -> {
-            EditarInformacion ventana = new EditarInformacion();
-            ventana.setVisible(true);
-        });
+         editarProductoButton.addActionListener(e -> {
+             EditarInformacionn ventana = new EditarInformacionn(conexion);
+             ventana.setVisible(true);
+         });
 
 
-        agregarProductoButton.addActionListener(e -> {
-            AnadirInformacionNuevoProduct ventana = new AnadirInformacionNuevoProduct(conexionCliente);
-            ventana.setVisible(true);
-        });
-     **/
-
+         agregarProductoButton.addActionListener(e -> {
+             AnadirInformacionNuevoProduct ventana = new AnadirInformacionNuevoProduct(conexion);
+             ventana.setVisible(true);
+         });
+     }
 }
 

@@ -20,14 +20,14 @@ public class VentanaPrincipal extends JDialog {
          setContentPane(panelPrincipal);
          setModal(true);
 
-       /** gestionarInventarioButton.addActionListener(new ActionListener() {
+       gestionarInventarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 VentanaInventario ventanaInventario = new VentanaInventario(conexionCliente);
                 ventanaInventario.setVisible(true);
             }
         });
-        **/
+
 
         gestionarPersonalButton.addActionListener(new ActionListener() {
             @Override
@@ -57,12 +57,7 @@ public class VentanaPrincipal extends JDialog {
                     ventanaPersonal.setVisible(true);
                 } else {
 
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "Contraseña incorrecta.",
-                            "Acceso denegado",
-                            JOptionPane.ERROR_MESSAGE
-                    );
+                    JOptionPane.showMessageDialog(null, "Contraseña incorrecta.", "Acceso denegado", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

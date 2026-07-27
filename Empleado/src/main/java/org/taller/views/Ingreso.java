@@ -3,6 +3,7 @@ package main.java.org.taller.views;
 import main.java.org.taller.ConexionCliente;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class Ingreso {
@@ -13,6 +14,8 @@ public class Ingreso {
     private JPasswordField txtContrasena;
     private JButton btnLogin;
     private ConexionCliente conexionCliente;
+    Window currentWindow = SwingUtilities.getWindowAncestor(login);
+
 
     public Ingreso(ConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;

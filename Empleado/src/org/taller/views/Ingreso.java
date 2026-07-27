@@ -9,4 +9,5 @@ public class Ingreso {
     private JLabel lblUsuario;
     private JTextField txtUsuario;
     private JButton btnLogin;
+    private JPanel login;
 }
