@@ -3,9 +3,11 @@
   <grid id="cbd77" binding="contentPane" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="48" y="54" width="436" height="297"/>
+      <xy x="48" y="54" width="444" height="297"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-11699331"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="94766" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -13,7 +15,9 @@
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-11699331"/>
+        </properties>
         <border type="none"/>
         <children>
           <hspacer id="98af6">
@@ -34,6 +38,8 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-11699331"/>
+                  <foreground color="-2368300"/>
                   <text value="OK"/>
                 </properties>
               </component>
@@ -42,6 +48,8 @@
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-11699331"/>
+                  <foreground color="-3025959"/>
                   <text value="Cancel"/>
                 </properties>
               </component>
@@ -54,7 +62,9 @@
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-11699331"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="9b1d0" class="javax.swing.JLabel">
@@ -62,6 +72,8 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="20" style="1"/>
+              <foreground color="-3025959"/>
               <text value="Categoria"/>
             </properties>
           </component>
@@ -70,6 +82,8 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="20" style="1"/>
+              <foreground color="-3025959"/>
               <text value="Nombre"/>
             </properties>
           </component>
@@ -78,6 +92,8 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="20" style="1"/>
+              <foreground color="-3025959"/>
               <text value="Precio"/>
             </properties>
           </component>
@@ -86,7 +102,9 @@
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Descripcion"/>
+              <font size="20" style="1"/>
+              <foreground color="-3025959"/>
+              <text value="Descripción"/>
             </properties>
           </component>
           <component id="93c9b" class="javax.swing.JLabel">
@@ -94,6 +112,8 @@
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="20" style="1"/>
+              <foreground color="-3025959"/>
               <text value="Cantidad disponible"/>
             </properties>
           </component>
@@ -103,13 +123,17 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-11699331"/>
+            </properties>
           </component>
           <component id="964c9" class="javax.swing.JComboBox" binding="cmbCategorias">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-11699331"/>
+            </properties>
           </component>
           <component id="d9d91" class="javax.swing.JTextField" binding="textNombre">
             <constraints>
@@ -117,7 +141,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-11699331"/>
+            </properties>
           </component>
           <component id="dadca" class="javax.swing.JTextField" binding="textDescripcion">
             <constraints>
@@ -125,7 +151,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-11699331"/>
+            </properties>
           </component>
           <component id="67e1e" class="javax.swing.JTextField" binding="textCantidadDisponible">
             <constraints>
@@ -133,7 +161,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-11699331"/>
+            </properties>
           </component>
         </children>
       </grid>
@@ -142,6 +172,9 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-394753"/>
+          <font size="20" style="1"/>
+          <foreground color="-3025959"/>
           <text value="Ingrese todos los datos del nuevo producto"/>
         </properties>
       </component>
