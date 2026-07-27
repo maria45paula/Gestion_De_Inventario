@@ -1,6 +1,10 @@
 package main.java.org.taller;
 
 
+import main.java.org.taller.views.gestionar_productos.AnadirInformacionNuevoProduct;
+import main.java.org.taller.views.gestionar_productos.EditarInformacionn;
+import main.java.org.taller.views.gestionar_productos.EliminarInformacionn;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -57,7 +61,9 @@ public class ClientePrincipal {
 
             try {
                 conexion.enviarPeticion(peticion);
-                //AnadirInformacionNuevoProducto nuevoProducto = new AnadirInformacionNuevoProducto(conexion);
+                AnadirInformacionNuevoProduct nuevoProducto = new AnadirInformacionNuevoProduct(conexion);
+                EditarInformacionn editarProducto = new EditarInformacionn(conexion);
+                EliminarInformacionn eliminarProducto = new EliminarInformacionn(conexion);
             } catch (IOException e) {
                 System.out.println("Error al enviar la peticion: " + e.getMessage());
                 break;

@@ -1,13 +1,9 @@
 package main.java.org.taller.views;
 
-import main.java.org.taller.ConexionCliente;
-import main.java.org.taller.views.gestionar_productos.AnadirInformacionNuevoProduct;
-import main.java.org.taller.views.gestionar_productos.EliminarInformacion;
-import main.java.org.taller.views.gestionar_productos.EditarInformacion.EditarInformacion;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+// import main.java.org.taller.views.gestionar_productos.EliminarInformacion;
+// import main.java.org.taller.views.gestionar_productos.EditarInformacion.EditarInformacion;
 
 public class VentanaInventario extends JDialog {
     private JPanel contentPane;
@@ -15,7 +11,7 @@ public class VentanaInventario extends JDialog {
     private JButton editarProductoButton;
     private JButton agregarProductoButton;
 
-    public VentanaInventario(ConexionCliente conexionCliente) {
+    /** public VentanaInventario(ConexionCliente conexionCliente) {
         setContentPane(contentPane);
         setModal(true);
 
@@ -29,8 +25,12 @@ public class VentanaInventario extends JDialog {
             ventana.setVisible(true);
         });
 
+
         agregarProductoButton.addActionListener(e -> {
             AnadirInformacionNuevoProduct ventana = new AnadirInformacionNuevoProduct(conexionCliente);
             ventana.setVisible(true);
         });
+     **/
+
 }
+

@@ -11,6 +11,7 @@ public class VentanaPrincipal extends JDialog {
     private JButton gestionarInventarioButton;
     private JButton gestionarPersonalButton;
     private JButton generarInformesButton;
+    private JPanel contentPane;
     private ConexionCliente conexionCliente;
 
     public VentanaPrincipal(ConexionCliente conexionCliente) {
@@ -19,13 +20,14 @@ public class VentanaPrincipal extends JDialog {
          setContentPane(panelPrincipal);
          setModal(true);
 
-        gestionarInventarioButton.addActionListener(new ActionListener() {
+       /** gestionarInventarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 VentanaInventario ventanaInventario = new VentanaInventario(conexionCliente);
                 ventanaInventario.setVisible(true);
             }
         });
+        **/
 
         gestionarPersonalButton.addActionListener(new ActionListener() {
             @Override

@@ -62,10 +62,10 @@
               <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Escriba el nombre del producto a editar : "/>
+              <text value="Escriba el ID del producto a editar : "/>
             </properties>
           </component>
-          <component id="d3388" class="javax.swing.JTextField" binding="textNombreProductoEditar">
+          <component id="d3388" class="javax.swing.JTextField" binding="textID">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>

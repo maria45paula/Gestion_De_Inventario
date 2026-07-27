@@ -1,14 +1,19 @@
 package main.java.org.taller.views.gestionar_productos;
 
+import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.validadores.IValidador;
+import main.java.org.taller.views.Error_;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class EditarInformacionn extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JLabel lblEscogerProductoEditar;
-    private JTextField textNombreProductoEditar;
+    private JTextField textID;
     private JLabel txtEscogerDatoEditar;
     private JRadioButton JRBNombre;
     private JRadioButton RBPrecio;
@@ -17,11 +22,22 @@ public class EditarInformacionn extends JDialog {
     private JRadioButton RBCategoria;
     private JLabel lblNuevoDato;
     private JTextField txtNuevoDato;
+    private ConexionCliente conexionCliente;
+    private IValidador validador;
 
-    public EditarInformacionn() {
+    public EditarInformacionn(ConexionCliente conexionCliente) {
+        this.conexionCliente = conexionCliente;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(JRBNombre);
+        grupo.add(RBPrecio);
+        grupo.add(RBCantidadDisponible);
+        grupo.add(RBDescripcion);
+        grupo.add(RBCategoria);
+
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -52,8 +68,31 @@ public class EditarInformacionn extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        try {
+            if (validador.validarString(textID.getText())) {
+
+// En el momento que necesites saber cuál está marcado:
+                String seleccion = "";
+                if (JRBNombre.isSelected()) seleccion = JRBNombre.getText();
+                if (RBPrecio.isSelected()) seleccion = RBPrecio.getText();
+                if (RBCantidadDisponible.isSelected()) seleccion = RBCantidadDisponible.getText();
+                if (RBDescripcion.isSelected()) seleccion = RBDescripcion.getText();
+                if (RBCategoria.isSelected()) seleccion = RBCategoria.getText();
+
+
+                conexionCliente.enviarPeticion("MODIFICAR;" + textID.getText() + ";" + seleccion + ";" + txtNuevoDato.getText());
+            } else {
+
+                Error_ error = new Error_();
+                error.setVisible(true);
+
+                JOptionPane.showMessageDialog(null, "Profe, ¿cómo se atreve a intentar dañar el código? :( \n Y los datos están malos, de paso");
+
+
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     private void onCancel() {
@@ -62,7 +101,7 @@ public class EditarInformacionn extends JDialog {
     }
 
     public static void main(String[] args) {
-        EditarInformacionn dialog = new EditarInformacionn();
+        EditarInformacionn dialog = new EditarInformacionn(new ConexionCliente("a", 13, "b", "c"));
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

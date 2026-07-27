@@ -1,16 +1,24 @@
 package main.java.org.taller.views.gestionar_productos;
 
+import main.java.org.taller.ConexionCliente;
+import main.java.org.taller.validadores.IValidador;
+import main.java.org.taller.views.Error_;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class EliminarInformacionn extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JLabel lblNombreProductoEliminar;
-    private JTextField textNombreProductoEliminar;
+    private JLabel lblIDProductoEliminar;
+    private JTextField textIDProductoEliminar;
+    private ConexionCliente conexionCliente;
+    private IValidador validador;
 
-    public EliminarInformacionn() {
+    public EliminarInformacionn( ConexionCliente conexionCliente) {
+        this.conexionCliente = conexionCliente;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -44,8 +52,25 @@ public class EliminarInformacionn extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        try {
+            if (validador.validarString(textIDProductoEliminar.getText())) {
+
+// En el momento que necesites saber cuál está marcado:
+
+
+                conexionCliente.enviarPeticion("ELIMINAR;" + textIDProductoEliminar.getText() );
+            } else {
+
+                Error_ error = new Error_();
+                error.setVisible(true);
+
+                JOptionPane.showMessageDialog(null, "Profe, ¿cómo se atreve a intentar dañar el código? :( \n Y los datos están malos, de paso");
+
+
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     private void onCancel() {
@@ -54,7 +79,7 @@ public class EliminarInformacionn extends JDialog {
     }
 
     public static void main(String[] args) {
-        EliminarInformacionn dialog = new EliminarInformacionn();
+        EliminarInformacionn dialog = new EliminarInformacionn(new ConexionCliente("a", 13, "b", "c"));
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
