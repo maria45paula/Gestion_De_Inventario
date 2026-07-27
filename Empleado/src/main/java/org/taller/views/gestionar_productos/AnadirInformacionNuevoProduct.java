@@ -3,6 +3,7 @@ package main.java.org.taller.views.gestionar_productos;
 import main.java.org.taller.ConexionCliente;
 import main.java.org.taller.validadores.IValidador;
 import main.java.org.taller.validadores.Validador;
+import main.java.org.taller.views.Error_;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,51 +15,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnadirInformacionNuevoProducto extends JDialog {
-    private JPanel principal;
-    private JButton btnOk;
+public class AnadirInformacionNuevoProduct extends JDialog {
+    private JPanel contentPane;
+    private JButton buttonOK;
     private JButton buttonCancel;
-    private JLabel lblIngresarDatos;
-    private JLabel lblNombre;
     private JTextField textNombre;
-    private JLabel lblPrecio;
-    private JTextField textPrecio;
-    private JLabel lblDescripcion;
-    private JTextField textDescripcion;
-    private JLabel lblCantidadDisponible;
-    private JTextField textCantidadDisponible;
-    private ConexionCliente conexionCliente;
     private JComboBox cmbCategorias;
+    private JTextField textPrecio;
+    private JTextField textDescripcion;
+    private JTextField textCantidadDisponible;
     private IValidador validador;
+    private ConexionCliente conexionCliente;
 
-
-    public AnadirInformacionNuevoProducto() {
+    public AnadirInformacionNuevoProduct(ConexionCliente conexionCliente) {
+        this.conexionCliente = conexionCliente;
         validador = new Validador();
-        //this.conexionCliente = conexionCliente;
-        //setContentPane(principal);
-        dialogInit();
-        
+        configCmb();
+
+        setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(btnOk);
+        getRootPane().setDefaultButton(buttonOK);
 
-
-        btnOk.addActionListener(e -> {
-            try {
-                if (validador.validarString(textNombre.getText()) && validador.validarInt(textPrecio.getText()) &&
-                        validador.validarString(textDescripcion.getText()) && validador.validarInt(textCantidadDisponible.getText())) {
-                    String categoria = cmbCategorias.getSelectedItem().toString();
-
-                    conexionCliente.enviarPeticion("AGREGAR;" + textNombre.getText() + ";" + categoria + ";" + textPrecio.getText() + ";" + textDescripcion.getText() + ";");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Profe, ¿cómo se atreve a intentar dañar el código? :( \n Y los datos están malos, de paso");
-                    Error error = new Error();
-
-                }
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+        buttonOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onOK();
             }
-
-
         });
 
         buttonCancel.addActionListener(new ActionListener() {
@@ -76,13 +57,11 @@ public class AnadirInformacionNuevoProducto extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        principal.registerKeyboardAction(new ActionListener() {
+        contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
-        configCmb();
     }
 
     private void onOK() {
@@ -95,13 +74,22 @@ public class AnadirInformacionNuevoProducto extends JDialog {
 
                 conexionCliente.enviarPeticion("AGREGAR;" + textNombre.getText() + ";" + categoria + ";" + textPrecio.getText() + ";" + textDescripcion.getText() + ";");
             } else {
+
+                System.out.println("Hola");
+                Error_ error = new Error_();
+                error.setVisible(true);
+
                 JOptionPane.showMessageDialog(null, "Profe, ¿cómo se atreve a intentar dañar el código? :( \n Y los datos están malos, de paso");
-                Error error = new Error();
+
 
             }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    private void onCancel() {
+        dispose();
     }
 
     private void configCmb() {
@@ -116,15 +104,11 @@ public class AnadirInformacionNuevoProducto extends JDialog {
         categorias.stream().forEach(e -> cmbCategorias.addItem(e));
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
-
     public static void main(String[] args) {
-        AnadirInformacionNuevoProducto dialog = new AnadirInformacionNuevoProducto();
-
+        AnadirInformacionNuevoProduct dialog = new AnadirInformacionNuevoProduct(new ConexionCliente("a", 13, "b", "c"));
         dialog.pack();
         dialog.setVisible(true);
+        System.exit(0);
     }
+
 }

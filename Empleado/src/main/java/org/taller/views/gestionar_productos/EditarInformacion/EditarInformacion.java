@@ -1,4 +1,4 @@
-package main.java.org.taller.views.gestionar_productos;
+package main.java.org.taller.views.gestionar_productos.EditarInformacion;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

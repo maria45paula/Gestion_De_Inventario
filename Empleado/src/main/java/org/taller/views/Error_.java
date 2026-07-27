@@ -3,22 +3,17 @@ package main.java.org.taller.views;
 import javax.swing.*;
 import java.awt.*;
 
-public class Error {
-    private JPanel panel1;
+public class Error_ extends JDialog {
+    private JPanel contentPane;
     private JLabel lblFoto;
 
-    public Error() {
+
+    public Error_() {
+        setContentPane(contentPane);
+        setModal(true);
+        pack();
+        setSize(300, 300);
         loadImage();
-        panel1.setVisible(true);
-
-    }
-
-    public JPanel getPanel() {
-        return panel1;
-    }
-
-    public void setPanel(JPanel panel1) {
-        this.panel1 = panel1;
     }
 
     public void loadImage() {
