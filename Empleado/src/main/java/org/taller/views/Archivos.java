@@ -12,6 +12,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * Clase que controla el formulario de gestión de archivos
+ */
 public class Archivos extends JDialog {
     private JPanel contentPane;
     private JButton buttonCancel;
@@ -20,7 +23,10 @@ public class Archivos extends JDialog {
     private IConexionCliente conexionCliente;
     private IValidador validador;
 
-
+    /**
+     * Constructor por parámetros
+     * @param conexionCliente Objeto que maneja la conexion con el servidor
+     */
     public Archivos(IConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
         this.validador = validador;
@@ -70,6 +76,10 @@ public class Archivos extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    /**
+     * Método llamado en el botón inventario
+     * @throws IOException si hay un error en la escritura del archivo
+     */
     private void onInventario() throws IOException {
 
 
@@ -89,6 +99,10 @@ public class Archivos extends JDialog {
         }
     }
 
+    /**
+     * Método que se llama en el botón Acciones
+     * @throws IOException si hay un error al escribir el archivo
+     */
         private void onLogs() throws IOException {
 
             String respuesta = conexionCliente.enviarPeticionYEsperarRespuesta("EXPORTARLOGS");
@@ -102,7 +116,10 @@ public class Archivos extends JDialog {
             }
         }
 
-
+    /**
+     * Método llamado en el botón cancel
+     * Cierra la ventana
+     */
     private void onCancel() {
         // add your code here if necessary
         dispose();
