@@ -2,6 +2,7 @@ package main.java.org.taller.views;
 
 import main.java.org.taller.conexion.IConexionCliente;
 import main.java.org.taller.validadores.IValidador;
+import main.java.org.taller.accionesistema.ExportarCSV;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,6 @@ import java.io.IOException;
 
 public class Archivos extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
     private JButton buttonCancel;
     private JButton CSVACCIONESEMPLEADOSButton;
     private JButton CSVINVENTARIOButton;
@@ -26,7 +26,6 @@ public class Archivos extends JDialog {
         this.validador = validador;
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
 
 
         CSVINVENTARIOButton.addActionListener(new ActionListener() {
@@ -72,14 +71,37 @@ public class Archivos extends JDialog {
     }
 
     private void onInventario() throws IOException {
-        conexionCliente.enviarPeticion("EXPORTAR");
 
+
+        String respuesta =
+                conexionCliente.enviarPeticionYEsperarRespuesta(
+                        "EXPORTAR"
+                );
+
+
+        if(respuesta.startsWith("OK;")){
+            String datos = respuesta.substring(3);
+            ExportarCSV.crearInventarioCSV(datos);
+
+            JOptionPane.showMessageDialog(this, "Inventario creado correctamente");
+        }else{
+            JOptionPane.showMessageDialog(this, respuesta);
+        }
     }
 
-    private void onLogs() throws IOException {
-        conexionCliente.enviarPeticion("EXPORTARLOGS");
+        private void onLogs() throws IOException {
 
-    }
+            String respuesta = conexionCliente.enviarPeticionYEsperarRespuesta("EXPORTARLOGS");
+
+            if(respuesta.startsWith("OK;")){
+                String datos = respuesta.substring(3);
+                ExportarCSV.crearAuditoriaCSV(datos);
+                JOptionPane.showMessageDialog(this, "Auditoria creada correctamente");
+            }else{
+                JOptionPane.showMessageDialog(this, respuesta);
+            }
+        }
+
 
     private void onCancel() {
         // add your code here if necessary
