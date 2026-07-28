@@ -24,6 +24,7 @@ public class VentanaPrincipal extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 VentanaInventario ventanaInventario = new VentanaInventario(conexionCliente);
                 ventanaInventario.setVisible(true);
+                ventanaInventario.setSize(800, 600);
             }
         });
 
@@ -42,6 +43,7 @@ public class VentanaPrincipal extends JDialog {
 
                     VentanaPersonal ventanaPersonal = new VentanaPersonal(conexionCliente, new Validador());
                     ventanaPersonal.pack();
+                    ventanaPersonal.setSize(800,600);
                     ventanaPersonal.setLocationRelativeTo(VentanaPrincipal.this);
                     ventanaPersonal.setVisible(true);
                 } else {
