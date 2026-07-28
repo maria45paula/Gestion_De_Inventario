@@ -54,7 +54,8 @@ public class VentanaPrincipal extends JDialog {
         generarInformesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Ventana de Informes
+                Archivos archivos = new Archivos(conexionCliente);
+                archivos.setVisible(true);
             }
         });
     }

@@ -56,7 +56,7 @@ public class ConexionSocket{
         if (entrada != null) {
             propiedades.load(entrada);
         } else {
-            System.out.println("No se encontro cliente.properties, usando valores por defecto (localhost).");
+            System.out.println("No se encontro cliente.properties");
         }
     } catch (IOException e) {
         System.out.println("Error al leer cliente.properties: " + e.getMessage());
