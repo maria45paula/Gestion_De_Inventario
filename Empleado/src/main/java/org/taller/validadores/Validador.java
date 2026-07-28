@@ -12,8 +12,8 @@ public class Validador implements IValidador {
     public boolean validarInt(String input) {
         if (input.isEmpty()) return false;
         try {
-            Integer.parseInt(input);
-            return true;
+            int num = Integer.parseInt(input);
+            return num >= 0;
         } catch (NumberFormatException e) {
             return false;
         }
