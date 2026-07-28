@@ -26,23 +26,23 @@ import java.util.Properties;
 
 public class ConexionSocket{
     public ConexionCliente conectar(){
-    Properties config = cargarConfiguracion();
+        Properties config = cargarConfiguracion();
 
-    String host = config.getProperty("host", "25.34.249.60");
-    int puerto = Integer.parseInt(config.getProperty("puerto", "9999"));
-    String rutaTruststore = config.getProperty("truststore", "cliente_truststore.p12");
-    String claveTruststore = config.getProperty("clave_truststore", "");
+        String host = config.getProperty("host", "25.35.56.42");
+        int puerto = Integer.parseInt(config.getProperty("puerto", "9999"));
+        String rutaTruststore = config.getProperty("truststore", "cliente_truststore.p12");
+        String claveTruststore = config.getProperty("clave_truststore", "");
 
-    ConexionCliente conexion = new ConexionCliente(host, puerto, rutaTruststore, claveTruststore);
+        ConexionCliente conexion = new ConexionCliente(host, puerto, rutaTruststore, claveTruststore);
 
-        try {
-        conexion.conectar();
-    } catch (Exception e) {
-        System.out.println("No se pudo conectar al servidor: " + e.getMessage());
+            try {
+            conexion.conectar();
+        } catch (Exception e) {
+            System.out.println("No se pudo conectar al servidor: " + e.getMessage());
+            return conexion;
+        }
         return conexion;
     }
-        return conexion;
-}
 
 /**
  * Carga cliente.properties desde el classpath. Si no existe,

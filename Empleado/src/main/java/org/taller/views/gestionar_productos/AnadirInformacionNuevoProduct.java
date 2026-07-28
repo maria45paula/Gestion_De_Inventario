@@ -115,7 +115,7 @@ public class AnadirInformacionNuevoProduct extends JDialog {
     private void configCmb() {
         List<String> categorias = new ArrayList<>();
         categorias.add("ASEO");
-        categorias.add("IMPLEMENTOS DE COCINA");
+        categorias.add("IMPLEMENTOSDECOCINA");
         categorias.add("ALIMENTOS");
         categorias.add("VEGETALES");
         categorias.add("CARNES");
