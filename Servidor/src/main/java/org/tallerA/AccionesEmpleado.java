@@ -11,6 +11,7 @@ import main.java.org.tallerA.modificadores.IModificador;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
@@ -223,6 +224,7 @@ public class AccionesEmpleado implements Runnable {
     private String exportarInventario() {
         try {
             List<Producto> productos = productoDAO.getProductos();
+            System.out.println(new File("acciones.log").getAbsolutePath());
             ExportadorCSV.exportarInventario(productos, "inventario.csv");
             String contenido = ExportadorCSV.leerArchivoPlano("inventario.csv");
             return "OK;" + contenido;
@@ -236,6 +238,8 @@ public class AccionesEmpleado implements Runnable {
      */
     private String exportarAuditoria() {
         try {
+            System.out.println(new File("auditoria.log").getAbsolutePath());
+
             ExportadorCSV.exportarAccionesEmpleados("acciones.log", "auditoria.csv");
             String contenido = ExportadorCSV.leerArchivoPlano("auditoria.csv");
             return "OK;" + contenido;
