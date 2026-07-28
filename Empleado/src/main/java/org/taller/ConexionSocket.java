@@ -28,8 +28,8 @@ public class ConexionSocket{
     public ConexionCliente conectar(){
     Properties config = cargarConfiguracion();
 
-    String host = config.getProperty("host", "localhost");
-    int puerto = Integer.parseInt(config.getProperty("puerto", "9090"));
+    String host = config.getProperty("host", "25.35.56.42");
+    int puerto = Integer.parseInt(config.getProperty("puerto", "9999"));
     String rutaTruststore = config.getProperty("truststore", "cliente_truststore.p12");
     String claveTruststore = config.getProperty("clave_truststore", "");
 

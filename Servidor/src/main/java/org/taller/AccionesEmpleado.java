@@ -8,10 +8,10 @@ import main.java.org.taller.enums.Categoria;
 import main.java.org.taller.gestionempleados.IGestorEmpleados;
 import main.java.org.taller.modificadores.IModificador;
 
-import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
@@ -45,18 +45,33 @@ public class AccionesEmpleado implements Runnable {
 
     @Override
     public void run() {
-        try (
-                BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter salida = new PrintWriter(socket.getOutputStream(), true)
-        ) {
-            String peticion = entrada.readLine();
-            if (peticion != null) {
+        DataOutputStream salida = null;
+        try (DataInputStream entrada = new DataInputStream(socket.getInputStream())) {
+            salida = new DataOutputStream(socket.getOutputStream());
+            gestorConexiones.registrar(salida); // para que reciba notificaciones de otros empleados
+
+            while (true) {
+                String peticion;
+                try {
+                    peticion = entrada.readUTF();
+                } catch (EOFException finDeConexion) {
+                    break; // el cliente cerro la conexion
+                }
+
+                if (peticion.equalsIgnoreCase("SALIR")) {
+                    break;
+                }
+
                 String respuesta = procesarPeticion(peticion);
-                salida.println(respuesta);
+                salida.writeUTF(respuesta);
+                salida.flush();
             }
         } catch (IOException e) {
             System.out.println("Error con el cliente: " + e.getMessage());
         } finally {
+            if (salida != null) {
+                gestorConexiones.eliminar(salida);
+            }
             try {
                 socket.close();
             } catch (IOException e) {
@@ -125,7 +140,7 @@ public class AccionesEmpleado implements Runnable {
         String ip = socket.getInetAddress().getHostAddress();
         RegistradorDeAcciones.registrar("AGREGAR", ip, producto.getNombre());
 
-        return "listo " + producto;
+        return "OK; " + producto;
     }
 
     private String buscar(String[] partes) {
@@ -133,9 +148,9 @@ public class AccionesEmpleado implements Runnable {
         Producto producto = productoDAO.buscarProducto(id);
 
         if (producto != null) {
-            return "se encontro:" + producto;
+            return "OK;" + producto;
         } else {
-            return "producto no encontrado";
+            return "ERROR;producto no encontrado";
         }
     }
 
@@ -146,9 +161,9 @@ public class AccionesEmpleado implements Runnable {
         if (eliminado == true) {
             String ip = socket.getInetAddress().getHostAddress();
             RegistradorDeAcciones.registrar("ELIMINAR", ip, "id " + id);
-            return "producto eliminado";
+            return "OK;producto eliminado";
         }
-        return "producto no encontrado";
+        return "ERROR;Producto no encontrado";
     }
 
     /**
@@ -223,7 +238,7 @@ public class AccionesEmpleado implements Runnable {
             resultado += producto + "|";
         }
 
-        return resultado;
+        return "OK;"+resultado;
     }
 
 }
