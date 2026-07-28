@@ -19,7 +19,6 @@ public class VentanaInventario extends JDialog {
         this.conexion = conexionCliente;
         setContentPane(contentPane);
         setModal(true);
-
         eliminarProductoButton.addActionListener(e -> {
             EliminarInformacionn ventana = new EliminarInformacionn(conexion,new Validador());
             ventana.setSize(800,600);

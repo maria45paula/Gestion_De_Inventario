@@ -27,6 +27,8 @@ public class Ingreso {
 
                 if (mensaje != null && mensaje.startsWith("OK")) {
                     VentanaPrincipal menu = new VentanaPrincipal(conexionCliente);
+                    menu.setSize(300,400);
+                    menu.setLocationRelativeTo(null);
                     menu.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(login, "Usuario o contrasena incorrectos, o el servidor no respondio.");
