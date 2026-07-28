@@ -65,9 +65,7 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    /*
-     *Aqui formamos el formato csv, sobreescribiendo el medoto que transforma un objeto en texto
-     * */
+
     @Override
     public String toString() {
         return "%d:%s:%s:%s:%d:%d".formatted(id, nombre, categoria, descripcion, precio, cantidad);

@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que controla el formulario de la ventana principal
+ */
 public class VentanaPrincipal extends JDialog {
     private JPanel panelPrincipal;
     private JButton gestionarInventarioButton;
@@ -14,6 +17,10 @@ public class VentanaPrincipal extends JDialog {
     private JButton generarInformesButton;
     private IConexionCliente conexionCliente;
 
+    /**
+     * Constructor por parámetros de la clase
+     * @param conexionCliente Objeto que se encarga de manejar la conexion con el servidor
+     */
     public VentanaPrincipal(IConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
         setContentPane(panelPrincipal);
@@ -57,11 +64,17 @@ public class VentanaPrincipal extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Archivos archivos = new Archivos(conexionCliente);
+                archivos.setSize(400,400);
+                archivos.setLocationRelativeTo(null);
                 archivos.setVisible(true);
             }
         });
     }
 
+    /**
+     * Getter del panel principal
+     * @return JPanel panelPrincipal
+     */
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
     }

@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que controla el form para añadir un nuevo producto
+ */
 public class AnadirInformacionNuevoProduct extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -26,6 +29,13 @@ public class AnadirInformacionNuevoProduct extends JDialog {
     private IValidador validador;
     private IConexionCliente conexionCliente;
 
+    /**
+     * Constructor por parámetros de la clase
+     * Llama a los métodos de configuración de los elementos
+     *
+     * @param conexionCliente Objeto que maneja la conexion con el servidor
+     * @param validador Objeto que puede validar Strings
+     */
     public AnadirInformacionNuevoProduct(IConexionCliente conexionCliente, IValidador validador) {
         this.conexionCliente = conexionCliente;
         this.validador = validador;
@@ -63,6 +73,11 @@ public class AnadirInformacionNuevoProduct extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    /**
+     * Método que es llamado en el momento que se presiona el boton Ok
+     * Recoge los inputs del ususario y los verifica, en caso de que sean correctos envía
+     * un mensaje al servidor, y en caso de ser incorrectos muestra un mensaje al usuario
+     */
     private void onOK() {
         //AGFREGAR, NOMBRE, CATEGORÍA, PRECIO, DESCRIPCION, CANTIDAD
 
@@ -86,10 +101,17 @@ public class AnadirInformacionNuevoProduct extends JDialog {
         }
     }
 
+    /**
+     * Método llamado al presionar el botón Cancel
+     * Cierra la ventana
+     */
     private void onCancel() {
         dispose();
     }
 
+    /**
+     * Método que configura el ComboBox de Categorías
+     */
     private void configCmb() {
         List<String> categorias = new ArrayList<>();
         categorias.add("ASEO");

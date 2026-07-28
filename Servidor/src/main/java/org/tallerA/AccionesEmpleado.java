@@ -1,6 +1,5 @@
 package main.java.org.tallerA;
 
-import main.java.org.tallerA.accionesistema.ExportadorCSV;
 import main.java.org.tallerA.accionesistema.IGestorConexion;
 import main.java.org.tallerA.accionesistema.RegistradorDeAcciones;
 import main.java.org.tallerA.accionesproducto.IProductoAccionado;
@@ -8,10 +7,11 @@ import main.java.org.tallerA.enums.Categoria;
 import main.java.org.tallerA.gestionempleados.IGestorEmpleados;
 import main.java.org.tallerA.modificadores.IModificador;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
-import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
@@ -130,6 +130,11 @@ public class AccionesEmpleado implements Runnable {
         return "ERROR;Usuario o contrasena incorrectos";
     }
 
+    /**
+     * Método que se encarga de agregar un empleado
+     * @param partes Array de Strings que contiene la petición
+     * @return
+     */
     private String agregarEmpleado(String[] partes) {
         String usuario = partes[1];
         String contrasena=partes[2];
@@ -142,6 +147,11 @@ public class AccionesEmpleado implements Runnable {
         return "OK; " + "registrado exitosamente";
     }
 
+    /**
+     * Método que se encarga de agregar un producto
+     * @param partes Array de Strings que contiene la petición
+     * @return String que dice que la operación se realizó correctamente
+     */
     private String agregar(String[] partes) {
         String nombre = partes[1];
         Categoria categoria = Categoria.valueOf(partes[2].toUpperCase());
@@ -157,6 +167,11 @@ public class AccionesEmpleado implements Runnable {
         return "OK; " + producto;
     }
 
+    /**
+     * Método que busca un producto
+     * @param partes Array de Strings que contiene la petición
+     * @return String que dice si el proceso se realizó correctamente o no
+     */
     private String buscar(String[] partes) {
         int id = Integer.parseInt(partes[1]);
         Producto producto = productoDAO.buscarProducto(id);
@@ -168,6 +183,11 @@ public class AccionesEmpleado implements Runnable {
         }
     }
 
+    /**
+     * Método que elimina un producto
+     * @param partes Array de Strings que contiene la petición
+     * @return String que dice si el proceso se realizó correctamente o no
+     */
     private String eliminar(String[] partes) {
         int id = Integer.parseInt(partes[1]);
         boolean eliminado = productoDAO.eliminarProducto(id);
@@ -222,42 +242,50 @@ public class AccionesEmpleado implements Runnable {
      * Genera el CSV del inventario en el servidor y lo envía al cliente.
      */
     private String exportarInventario() {
-        try {
-            List<Producto> productos = productoDAO.getProductos();
-            System.out.println(new File("inventario.csv").getAbsolutePath());
-            ExportadorCSV.exportarInventario(productos, "inventario.csv");
-            String contenido = ExportadorCSV.leerArchivoPlano("inventario.csv");
-            return "OK;" + contenido;
-        } catch (IOException e) {
-            return "ERROR;" + e.getMessage();
+
+        List<Producto> productos = productoDAO.getProductos();
+        StringBuilder datos = new StringBuilder();
+        for (Producto producto : productos) {
+            datos.append(producto.getId()).append(",")
+            .append(producto.getNombre()).append(",")
+            .append(producto.getCategoria()).append(",")
+            .append(producto.getDescripcion()).append(",")
+            .append(producto.getPrecio()).append(",")
+            .append(producto.getCantidad())
+            .append("~");
         }
+
+
+        return "OK;" + datos;
     }
 
     /**
      * Genera el CSV del log de auditoría en el servidor y lo envía al cliente.
      */
     private String exportarAuditoria() {
+
         try {
-            File archivoLog = new File("acciones.log");
+            BufferedReader lector = new BufferedReader(new FileReader("acciones.log"));
+            StringBuilder datos = new StringBuilder();
 
-            System.out.println("Ruta: " + archivoLog.getAbsolutePath());
-            System.out.println("Existe: " + archivoLog.exists());
+            String linea;
 
-            ExportadorCSV.exportarAccionesEmpleados("acciones.log", "auditoria.csv");
 
-            File archivoCsv = new File("auditoria.csv");
-            System.out.println("CSV creado: " + archivoCsv.getAbsolutePath());
-            System.out.println("Existe CSV: " + archivoCsv.exists());
+            while((linea = lector.readLine()) != null){
+                datos.append(linea).append("~");
+            }
+            lector.close();
 
-            String contenido = ExportadorCSV.leerArchivoPlano("auditoria.csv");
-            return "OK;" + contenido;
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            return "OK;" + datos;
+        } catch(IOException e){
             return "ERROR;" + e.getMessage();
         }
     }
 
+    /**
+     * Método que regresa todos los productos como un String
+     * @return String listar-> Contiene a todos los productos como un String
+     */
     private String listar() {
         List<Producto> productos = productoDAO.getProductos();
         String resultado = "";
