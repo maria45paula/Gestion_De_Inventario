@@ -30,6 +30,7 @@ public class VentanaPrincipal extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 VentanaInventario ventanaInventario = new VentanaInventario(conexionCliente);
+                ventanaInventario.setLocationRelativeTo(VentanaPrincipal.this);
                 ventanaInventario.pack();
                 ventanaInventario.setVisible(true);
                 ventanaInventario.setSize(900, 600);

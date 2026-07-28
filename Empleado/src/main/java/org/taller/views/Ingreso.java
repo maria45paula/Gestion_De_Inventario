@@ -40,7 +40,7 @@ public class Ingreso {
 
                 if (mensaje != null && mensaje.startsWith("OK")) {
                     VentanaPrincipal menu = new VentanaPrincipal(conexionCliente);
-                    menu.setSize(300,400);
+                    menu.setSize(700,400);
                     menu.setLocationRelativeTo(null);
                     menu.setVisible(true);
                 } else {
