@@ -1,0 +1,10 @@
+2026-07-28 11:01:26 | LOGIN | IP: 25.34.249.60 | Recurso: juan
+2026-07-28 11:03:40 | AGREGAR | IP: 25.34.249.60 | Recurso: banano
+2026-07-28 11:06:35 | LOGIN | IP: 25.45.152.158 | Recurso: Emmanuel
+2026-07-28 11:06:42 | LOGIN | IP: 25.45.152.158 | Recurso: Emmanuel
+2026-07-28 11:22:38 | LOGIN | IP: 25.35.56.42 | Recurso: maria
+2026-07-28 11:23:09 | LOGIN | IP: 25.34.249.60 | Recurso: juan
+2026-07-28 11:23:55 | AGREGAR | IP: 25.34.249.60 | Recurso: banano
+2026-07-28 11:23:56 | AGREGAR | IP: 25.35.56.42 | Recurso: manzana
+2026-07-28 11:24:22 | ACTUALIZAR | IP: 25.34.249.60 | Recurso: id 2 (NOMBRE)
+2026-07-28 11:24:35 | ACTUALIZAR | IP: 25.34.249.60 | Recurso: id 2 (NOMBRE)
