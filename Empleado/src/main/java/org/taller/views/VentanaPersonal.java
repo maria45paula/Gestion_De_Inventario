@@ -38,12 +38,7 @@ public class VentanaPersonal extends JDialog {
             }
         });
 
-        eliminarEmpleadoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                eliminarEmpleado();
-            }
-        });
+
     }
 
     /**
