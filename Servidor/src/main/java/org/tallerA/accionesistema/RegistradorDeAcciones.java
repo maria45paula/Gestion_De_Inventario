@@ -6,6 +6,9 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Clase que registra todas las acciones hechas por los usuarios
+ */
 public class RegistradorDeAcciones {
 
 

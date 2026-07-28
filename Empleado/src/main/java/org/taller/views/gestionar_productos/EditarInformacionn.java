@@ -12,6 +12,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * Clase que controla el form para editar la información de un producto
+ */
 public class EditarInformacionn extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -29,6 +32,11 @@ public class EditarInformacionn extends JDialog {
     private IConexionCliente conexionCliente;
     private IValidador validador;
 
+    /**
+     * Constructor por parámetros de la clase y configura los elementos del formulario
+     * @param conexionCliente Objeto que maneja la conexion con el servidor
+     * @param validador Objeto que puede validar Strings
+     */
     public EditarInformacionn(IConexionCliente conexionCliente, IValidador validador) {
         this.conexionCliente = conexionCliente;
         this.validador=validador;
@@ -72,11 +80,16 @@ public class EditarInformacionn extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    /**
+     * Método que se llama al presionar el botón ok
+     * Valida que el Id sea correcto
+     * En caso que sí sea correcto envía un mensaje al servidor
+     * En caso que sea incorrecto muestra un mensaje al usuario
+     */
     private void onOK() {
         try {
             if (validador.validarInt(textID.getText())) {
 
-// En el momento que necesites saber cuál está marcado:
                 String seleccion = "";
                 if (JRBNombre.isSelected()) seleccion = JRBNombre.getText();
                 if (RBPrecio.isSelected()) seleccion = RBPrecio.getText();
@@ -100,8 +113,11 @@ public class EditarInformacionn extends JDialog {
         }
     }
 
+    /**
+     * Método llamado al presionar el botón Cancel
+     * Cierra la ventana
+     */
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 

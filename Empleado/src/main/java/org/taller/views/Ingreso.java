@@ -5,6 +5,9 @@ import main.java.org.taller.conexion.IConexionCliente;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Clase que maneja el formulario de login
+ */
 public class Ingreso {
     public JPanel login;
     private JTextField txtContrasena;
@@ -14,12 +17,22 @@ public class Ingreso {
     private IConexionCliente conexionCliente;
     private JButton btnLogin;
 
+    /**
+     * Constructor por parámetros de la clase
+     * @param conexionCliente Objeto que maneja la conexion con el servidor
+     */
     public Ingreso(IConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
         loginConfig();
 
     }
 
+    /**
+     * Método que configura el botón Login
+     * Cuando se presiona envia un mensaje al servidor para verificar el usuario
+     * Y si es correcto abre la ventana principal
+     * Si no lo es muestra un mensaje al usuario
+     */
     public void loginConfig() {
         btnLogin.addActionListener(e -> {
             try {

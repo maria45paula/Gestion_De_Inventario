@@ -5,6 +5,9 @@ import main.java.org.tallerA.Empleado;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que se encarga de gestionar los empleados
+ */
 public class GestionEmpleado implements IGestorEmpleados {
 
     /**
@@ -23,6 +26,11 @@ public class GestionEmpleado implements IGestorEmpleados {
         empleados.add(new Empleado("Emmanuel", "clave789"));
     }
 
+    /**
+     * Agrega un empleado
+     * @param usuario String que contiene el usuario del empleado
+     * @param contrasena String que contiene la contraseña del empleado
+     */
     public void agregarEmpleado(String usuario,String contrasena) {
         empleados.add(new Empleado(usuario,contrasena));
     }

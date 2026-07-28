@@ -63,7 +63,11 @@ public class ConexionCliente implements IConexionCliente {
         hiloEscucha.start();
     }
 
-
+    /**
+     * Muestra mensajes enviados por el servidor en la consola
+     *
+     * @param mensaje String  Mensaje que se va a mostrar
+     */
     private void mostrarEnConsola(String mensaje) {
         if (mensaje.startsWith("NOTIFICACION;")) {
             System.out.println();
@@ -95,10 +99,21 @@ public class ConexionCliente implements IConexionCliente {
         }
     }
 
+    /**
+     * En el caso de que la conexion con el serivdor se rompa
+     * muestra un mensaje por consola
+     *
+     * @param motivo String Contiene el motiva de la desconexion
+     */
     private void avisarDesconexion(String motivo) {
         mostrarEnConsola("ERROR; " + motivo);
     }
 
+    /**
+     * Método getter para el último mensaje enviado por el servidor
+     *
+     * @return String que contiene el último mensaje del servidor
+     */
     public String getUltimoMensaje() {
         return ultimoMensaje;
     }
@@ -131,6 +146,8 @@ public class ConexionCliente implements IConexionCliente {
     /**
      * Construye la fábrica de sockets SSL a partir del truststore del cliente,
      * que contiene el certificado público del servidor en el que se confía.
+     *
+     * @return SSLSocketFactory objeto que puede crear SSLSockets
      */
     private SSLSocketFactory crearFabricaSSL() throws Exception {
         KeyStore trustStore = KeyStore.getInstance("PKCS12");
@@ -149,6 +166,15 @@ public class ConexionCliente implements IConexionCliente {
 
     private final Object candado = new Object();
 
+    /**
+     * Envía una petición al servidor y recibe la respuesta del servidor
+     *
+     * @param peticion Strign que contiene el texto de la petición, formato "OPERACION;dato1;dato2;..."
+     *
+     * @return String que contiene el último mensaje mandado por el servidor
+     *
+     * @throws IOException En caso que la conexion se interrumpa mientras espera el mensaje
+     */
     public String enviarPeticionYEsperarRespuesta(String peticion) throws IOException {
         synchronized (candado) {
             ultimoMensaje = null;

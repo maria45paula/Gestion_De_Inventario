@@ -8,6 +8,9 @@ import main.java.org.taller.views.gestionar_productos.EliminarInformacionn;
 
 import javax.swing.*;
 
+/**
+ * Clase que controla el formulario de gestión de inventario
+ */
 public class VentanaInventario extends JDialog {
     private JPanel contentPane;
     private JButton eliminarProductoButton;
@@ -15,6 +18,10 @@ public class VentanaInventario extends JDialog {
     private JButton agregarProductoButton;
     private IConexionCliente conexion;
 
+    /**
+     * Constructor por parámetros de la clase
+     * @param conexionCliente Objeto que maneja la conexion con el cliente
+     */
     public VentanaInventario(IConexionCliente conexionCliente) {
         this.conexion = conexionCliente;
         setContentPane(contentPane);

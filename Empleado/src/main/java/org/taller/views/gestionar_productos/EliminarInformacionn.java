@@ -12,6 +12,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * Clase que controla el formulario para eliminar un Producto
+ */
 public class EliminarInformacionn extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -21,6 +24,13 @@ public class EliminarInformacionn extends JDialog {
     private IConexionCliente conexionCliente;
     private IValidador validador;
 
+
+    /**
+     * Constructor por parámetros de la clase
+     * Configura los elementos del formulario
+     * @param conexionCliente Objeto que maneja la conexion con el servidor
+     * @param validador Objeto que puede validar Strings
+     */
     public EliminarInformacionn(IConexionCliente conexionCliente,IValidador validador) {
         this.conexionCliente = conexionCliente;
         this.validador=validador;
@@ -56,11 +66,15 @@ public class EliminarInformacionn extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    /**
+     * Método que se llama al presionar el botón ok
+     * Valida si el ID ingresado  es correcto
+     * Y si lo es envía un mensaje el servidor
+     */
     private void onOK() {
         try {
             if (validador.validarString(textIDProductoEliminar.getText())) {
 
-// En el momento que necesites saber cuál está marcado:
 
 
                 conexionCliente.enviarPeticion("ELIMINAR;" + textIDProductoEliminar.getText());
@@ -78,6 +92,10 @@ public class EliminarInformacionn extends JDialog {
         }
     }
 
+    /**
+     * Método que se llama al presionar el botón cancel,
+     * Cierra la ventana
+     */
     private void onCancel() {
         // add your code here if necessary
         dispose();
