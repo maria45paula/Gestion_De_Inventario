@@ -14,7 +14,6 @@ public class Ingreso {
     private JPasswordField txtContrasena;
     private JButton btnLogin;
     private IConexionCliente conexionCliente;
-    Window currentWindow = SwingUtilities.getWindowAncestor(login);
 
 
     public Ingreso(IConexionCliente conexionCliente) {
@@ -29,7 +28,8 @@ public class Ingreso {
                 String mensaje = conexionCliente.getUltimoMensaje();
 
                 if (mensaje.equals("OK")) {
-                    //Lógica para redireccionar
+                    VentanaPrincipal menu = new VentanaPrincipal(conexionCliente);
+                    menu.setVisible(true);
                 } else {
 
                 }
