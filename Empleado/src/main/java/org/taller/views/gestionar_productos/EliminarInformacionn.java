@@ -1,6 +1,5 @@
 package main.java.org.taller.views.gestionar_productos;
 
-import main.java.org.taller.conexion.ConexionCliente;
 import main.java.org.taller.conexion.IConexionCliente;
 import main.java.org.taller.validadores.IValidador;
 import main.java.org.taller.views.Error_;
@@ -22,8 +21,9 @@ public class EliminarInformacionn extends JDialog {
     private IConexionCliente conexionCliente;
     private IValidador validador;
 
-    public EliminarInformacionn(IConexionCliente conexionCliente) {
+    public EliminarInformacionn(IConexionCliente conexionCliente,IValidador validador) {
         this.conexionCliente = conexionCliente;
+        this.validador=validador;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -83,10 +83,4 @@ public class EliminarInformacionn extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        EliminarInformacionn dialog = new EliminarInformacionn(new ConexionCliente("a", 13, "b", "c"));
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

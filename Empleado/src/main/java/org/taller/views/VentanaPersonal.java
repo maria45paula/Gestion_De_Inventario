@@ -47,18 +47,12 @@ public class VentanaPersonal extends JDialog {
         if (contrasena == null) {
             return;
         }
-        String idTexto = JOptionPane.showInputDialog("Ingrese el ID del empleado:");
-        if (idTexto == null) {
-            return;
-        }
 
         try {
 
-            if (validador.validarString(usuario)
-                    && validador.validarString(contrasena)
-                    && validador.validarInt(idTexto)) {
+            if (validador.validarString(usuario) && validador.validarString(contrasena)) {
 
-                conexionCliente.enviarPeticion("AGREGAR_EMPLEADO;" + usuario + ";" + contrasena + ";" + idTexto + ";");
+                conexionCliente.enviarPeticion("AGREGAREMPLEADO;" + usuario + ";" + contrasena);
                 JOptionPane.showMessageDialog(null, "Empleado agregado correctamente.");
             } else {
                 Error_ error = new Error_();

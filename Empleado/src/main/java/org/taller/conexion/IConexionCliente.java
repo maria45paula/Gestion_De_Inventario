@@ -9,5 +9,8 @@ public interface IConexionCliente {
 
     void enviarPeticion(String peticion) throws IOException;
 
+    String enviarPeticionYEsperarRespuesta(String peticion) throws IOException;
+
+
     void cerrar();
 }

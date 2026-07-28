@@ -23,22 +23,21 @@ public class Ingreso {
     public void loginConfig() {
         btnLogin.addActionListener(e -> {
             try {
-                conexionCliente.enviarPeticion("AUTENTICAR;" + txtUsuario.getText() + ";" + txtContrasena.getText());
-                String mensaje = conexionCliente.getUltimoMensaje();
+                String mensaje = conexionCliente.enviarPeticionYEsperarRespuesta("AUTENTICAR;" + txtUsuario.getText() + ";" + txtContrasena.getText());
 
-                if (mensaje.equals("OK")) {
+                if (mensaje != null && mensaje.startsWith("OK")) {
                     VentanaPrincipal menu = new VentanaPrincipal(conexionCliente);
                     menu.setVisible(true);
                 } else {
-
+                    JOptionPane.showMessageDialog(login, "Usuario o contrasena incorrectos, o el servidor no respondio.");
                 }
-
-
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                JOptionPane.showMessageDialog(login, "Error de conexion: " + ex.getMessage());
             }
 
         });
     }
+
+
 
 }

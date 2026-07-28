@@ -1,9 +1,7 @@
 package main.java.org.taller.views.gestionar_productos;
 
-import main.java.org.taller.conexion.ConexionCliente;
 import main.java.org.taller.conexion.IConexionCliente;
 import main.java.org.taller.validadores.IValidador;
-import main.java.org.taller.validadores.Validador;
 import main.java.org.taller.views.Error_;
 
 import javax.swing.*;
@@ -69,11 +67,10 @@ public class AnadirInformacionNuevoProduct extends JDialog {
         //AGFREGAR, NOMBRE, CATEGORÍA, PRECIO, DESCRIPCION, CANTIDAD
 
         try {
-            if (validador.validarString(textNombre.getText()) && validador.validarInt(textPrecio.getText()) &&
-                    validador.validarString(textDescripcion.getText()) && validador.validarInt(textCantidadDisponible.getText())) {
+            if (validador.validarString(textNombre.getText()) && validador.validarInt(textPrecio.getText()) && validador.validarString(textDescripcion.getText()) && validador.validarInt(textCantidadDisponible.getText())) {
                 String categoria = cmbCategorias.getSelectedItem().toString();
 
-                conexionCliente.enviarPeticion("AGREGAR;" + textNombre.getText() + ";" + categoria + ";" + textPrecio.getText() + ";" + textDescripcion.getText() + ";");
+                conexionCliente.enviarPeticion("AGREGAR;" + textNombre.getText() + ";" + categoria + ";" + textPrecio.getText() + ";" + textDescripcion.getText() + ";"+textCantidadDisponible.getText());
             } else {
 
                 System.out.println("Hola");
@@ -105,11 +102,6 @@ public class AnadirInformacionNuevoProduct extends JDialog {
         categorias.stream().forEach(e -> cmbCategorias.addItem(e));
     }
 
-    public static void main(String[] args) {
-        AnadirInformacionNuevoProduct dialog = new AnadirInformacionNuevoProduct(new ConexionCliente("a", 13, "b", "c"), new Validador());
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
+
 
 }

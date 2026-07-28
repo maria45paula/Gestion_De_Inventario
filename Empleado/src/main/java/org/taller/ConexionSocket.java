@@ -41,7 +41,6 @@ public class ConexionSocket{
         System.out.println("No se pudo conectar al servidor: " + e.getMessage());
         return conexion;
     }
-        conexion.cerrar();
         return conexion;
 }
 

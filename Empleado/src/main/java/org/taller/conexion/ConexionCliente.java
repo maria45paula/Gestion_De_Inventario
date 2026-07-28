@@ -82,7 +82,10 @@ public class ConexionCliente implements IConexionCliente {
         try {
             while (true) {
                 String mensaje = entrada.readUTF();
-                ultimoMensaje = mensaje;
+                synchronized (candado) {
+                    ultimoMensaje = mensaje;
+                    candado.notifyAll();
+                }
                 mostrarEnConsola(mensaje);
             }
         } catch (EOFException e) {
@@ -142,5 +145,23 @@ public class ConexionCliente implements IConexionCliente {
         sslContext.init(null, trustManagerFactory.getTrustManagers(), null);
 
         return sslContext.getSocketFactory();
+    }
+
+    private final Object candado = new Object();
+
+    public String enviarPeticionYEsperarRespuesta(String peticion) throws IOException {
+        synchronized (candado) {
+            ultimoMensaje = null;
+        }
+        enviarPeticion(peticion);
+        synchronized (candado) {
+            try {
+                candado.wait(5000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new IOException("Interrumpido esperando respuesta", e);
+            }
+            return ultimoMensaje;
+        }
     }
 }

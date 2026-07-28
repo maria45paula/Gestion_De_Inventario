@@ -12,11 +12,9 @@ public class VentanaPrincipal extends JDialog {
     private JButton gestionarInventarioButton;
     private JButton gestionarPersonalButton;
     private JButton generarInformesButton;
-    private JPanel contentPane;
     private IConexionCliente conexionCliente;
 
     public VentanaPrincipal(IConexionCliente conexionCliente) {
-
         this.conexionCliente = conexionCliente;
         setContentPane(panelPrincipal);
         setModal(true);
@@ -34,23 +32,13 @@ public class VentanaPrincipal extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String contraseña = JOptionPane.showInputDialog(
-                        null,
-                        "Ingrese la contraseña de administrador:",
-                        "Acceso Restringido",
-                        JOptionPane.QUESTION_MESSAGE
-                );
+                String contraseña = JOptionPane.showInputDialog(null, "Ingrese la contraseña de administrador:", "Acceso Restringido", JOptionPane.QUESTION_MESSAGE);
                 if (contraseña == null) {
                     return;
                 }
                 if (contraseña.equals("admin1234")) {
 
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "Acceso concedido.",
-                            "Correcto",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
+                    JOptionPane.showMessageDialog(null, "Acceso concedido.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
 
                     VentanaPersonal ventanaPersonal = new VentanaPersonal(conexionCliente, new Validador());
                     ventanaPersonal.pack();

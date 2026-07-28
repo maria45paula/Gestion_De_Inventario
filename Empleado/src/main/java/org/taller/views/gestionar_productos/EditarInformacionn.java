@@ -1,6 +1,5 @@
 package main.java.org.taller.views.gestionar_productos;
 
-import main.java.org.taller.conexion.ConexionCliente;
 import main.java.org.taller.conexion.IConexionCliente;
 import main.java.org.taller.validadores.IValidador;
 import main.java.org.taller.views.Error_;
@@ -30,8 +29,9 @@ public class EditarInformacionn extends JDialog {
     private IConexionCliente conexionCliente;
     private IValidador validador;
 
-    public EditarInformacionn(IConexionCliente conexionCliente) {
+    public EditarInformacionn(IConexionCliente conexionCliente, IValidador validador) {
         this.conexionCliente = conexionCliente;
+        this.validador=validador;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -74,7 +74,7 @@ public class EditarInformacionn extends JDialog {
 
     private void onOK() {
         try {
-            if (validador.validarString(textID.getText())) {
+            if (validador.validarInt(textID.getText())) {
 
 // En el momento que necesites saber cuál está marcado:
                 String seleccion = "";
@@ -105,10 +105,4 @@ public class EditarInformacionn extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        EditarInformacionn dialog = new EditarInformacionn(new ConexionCliente("a", 13, "b", "c"));
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }
