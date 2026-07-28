@@ -59,15 +59,12 @@ public class VentanaPersonal extends JDialog {
                     && validador.validarInt(idTexto)) {
 
                 conexionCliente.enviarPeticion("AGREGAR_EMPLEADO;" + usuario + ";" + contrasena + ";" + idTexto + ";");
-                JOptionPane.showMessageDialog(null,
-                        "Empleado agregado correctamente.");
+                JOptionPane.showMessageDialog(null, "Empleado agregado correctamente.");
             } else {
                 Error_ error = new Error_();
                 error.setVisible(true);
                 JOptionPane.showMessageDialog(null, "Los datos ingresados no son válidos.");
-
             }
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }

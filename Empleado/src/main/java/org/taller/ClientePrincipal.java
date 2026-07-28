@@ -2,97 +2,23 @@ package main.java.org.taller;
 
 
 import main.java.org.taller.conexion.ConexionCliente;
-import main.java.org.taller.validadores.Validador;
-import main.java.org.taller.views.gestionar_productos.AnadirInformacionNuevoProduct;
-import main.java.org.taller.views.gestionar_productos.EditarInformacionn;
-import main.java.org.taller.views.gestionar_productos.EliminarInformacionn;
+import main.java.org.taller.views.Ingreso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.Scanner;
+import javax.swing.*;
 
-/**
- * Punto de entrada del proyecto Empleado (cliente de consola).
- * Lee la configuracion de conexion desde cliente.properties,
- * mantiene una conexion abierta durante toda la sesion, y muestra
- * tanto las respuestas a lo que uno pregunta como los avisos que
- * lleguen del servidor cuando otro empleado hace un cambio.
- * <p>
- * Ejemplos de peticiones que se pueden escribir:
- * AGREGAR;Leche;ALIMENTOS;3500;Leche entera 1L;20
- * BUSCAR;1
- * MODIFICAR;1;PRECIO;4000
- * ELIMINAR;1
- * LISTAR
- * EXPORTAR
- * EXPORTARLOGS
- * salir
- */
 public class ClientePrincipal {
 
     public static void main(String[] args) {
-        Properties config = cargarConfiguracion();
-
-        String host = config.getProperty("host", "localhost");
-        int puerto = Integer.parseInt(config.getProperty("puerto", "9090"));
-        String rutaTruststore = config.getProperty("truststore", "cliente_truststore.p12");
-        String claveTruststore = config.getProperty("clave_truststore", "");
-
-        ConexionCliente conexion = new ConexionCliente(host, puerto, rutaTruststore, claveTruststore);
-
-        try {
-            conexion.conectar();
-        } catch (Exception e) {
-            System.out.println("No se pudo conectar al servidor: " + e.getMessage());
-            return;
-        }
-
-        System.out.println("Conectado a " + host + ":" + puerto);
-        System.out.println("Escribe una peticion o 'salir' para terminar.");
-
-        Scanner teclado = new Scanner(System.in);
-        String peticion;
-        while (true) {
-            System.out.print("> ");
-            peticion = teclado.nextLine();
-
-            if (peticion.equalsIgnoreCase("salir")) {
-                break;
-            }
-
-            try {
-                conexion.enviarPeticion(peticion);
-                AnadirInformacionNuevoProduct nuevoProducto = new AnadirInformacionNuevoProduct(conexion, new Validador());
-                EditarInformacionn editarProducto = new EditarInformacionn(conexion);
-                EliminarInformacionn eliminarProducto = new EliminarInformacionn(conexion);
-            } catch (IOException e) {
-                System.out.println("Error al enviar la peticion: " + e.getMessage());
-                break;
-            }
-        }
-
-        conexion.cerrar();
-        System.out.println("Cliente finalizado.");
-    }
-
-    /**
-     * Carga cliente.properties desde el classpath. Si no existe,
-     * se usan valores por defecto (utiles solo para pruebas locales).
-     *
-     * @return propiedades de configuracion del cliente.
-     */
-    private static Properties cargarConfiguracion() {
-        Properties propiedades = new Properties();
-        try (InputStream entrada = ClientePrincipal.class.getClassLoader().getResourceAsStream("cliente.properties")) {
-            if (entrada != null) {
-                propiedades.load(entrada);
-            } else {
-                System.out.println("No se encontro cliente.properties, usando valores por defecto (localhost).");
-            }
-        } catch (IOException e) {
-            System.out.println("Error al leer cliente.properties: " + e.getMessage());
-        }
-        return propiedades;
+        ConexionSocket conexionSocket = new ConexionSocket();
+        ConexionCliente conexion = conexionSocket.conectar();
+        JFrame ingresar = new JFrame("login");
+        Ingreso ingreso = new Ingreso(conexion);
+        ingreso.loginConfig();
+        ingresar.setContentPane(ingreso.login);
+        ingresar.pack();
+        ingresar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ingresar.setLocationRelativeTo(null);
+        ingresar.setSize(600, 600);
+        ingresar.setVisible(true);
     }
 }

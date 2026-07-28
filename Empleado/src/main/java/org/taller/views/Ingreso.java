@@ -3,25 +3,24 @@ package main.java.org.taller.views;
 import main.java.org.taller.conexion.IConexionCliente;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class Ingreso {
-    private JLabel lblIngreso;
-    private JLabel lblUsuario;
+    public JPanel login;
+    private JTextField txtContrasena;
     private JTextField txtUsuario;
     private JLabel lblContrasena;
-    private JPasswordField txtContrasena;
-    private JButton btnLogin;
+    private JLabel lblUsuario;
     private IConexionCliente conexionCliente;
-
+    private JButton btnLogin;
 
     public Ingreso(IConexionCliente conexionCliente) {
         this.conexionCliente = conexionCliente;
         loginConfig();
+
     }
 
-    private void loginConfig() {
+    public void loginConfig() {
         btnLogin.addActionListener(e -> {
             try {
                 conexionCliente.enviarPeticion("AUTENTICAR;" + txtUsuario.getText() + ";" + txtContrasena.getText());
@@ -41,4 +40,5 @@ public class Ingreso {
 
         });
     }
+
 }
