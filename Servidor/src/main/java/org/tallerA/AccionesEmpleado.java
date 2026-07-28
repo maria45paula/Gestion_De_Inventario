@@ -224,7 +224,7 @@ public class AccionesEmpleado implements Runnable {
     private String exportarInventario() {
         try {
             List<Producto> productos = productoDAO.getProductos();
-            System.out.println(new File("acciones.log").getAbsolutePath());
+            System.out.println(new File("inventario.csv").getAbsolutePath());
             ExportadorCSV.exportarInventario(productos, "inventario.csv");
             String contenido = ExportadorCSV.leerArchivoPlano("inventario.csv");
             return "OK;" + contenido;
@@ -238,12 +238,22 @@ public class AccionesEmpleado implements Runnable {
      */
     private String exportarAuditoria() {
         try {
-            System.out.println(new File("auditoria.log").getAbsolutePath());
+            File archivoLog = new File("acciones.log");
+
+            System.out.println("Ruta: " + archivoLog.getAbsolutePath());
+            System.out.println("Existe: " + archivoLog.exists());
 
             ExportadorCSV.exportarAccionesEmpleados("acciones.log", "auditoria.csv");
+
+            File archivoCsv = new File("auditoria.csv");
+            System.out.println("CSV creado: " + archivoCsv.getAbsolutePath());
+            System.out.println("Existe CSV: " + archivoCsv.exists());
+
             String contenido = ExportadorCSV.leerArchivoPlano("auditoria.csv");
             return "OK;" + contenido;
+
         } catch (IOException e) {
+            e.printStackTrace();
             return "ERROR;" + e.getMessage();
         }
     }
