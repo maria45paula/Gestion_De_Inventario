@@ -22,17 +22,20 @@ public class VentanaInventario extends JDialog {
 
         eliminarProductoButton.addActionListener(e -> {
             EliminarInformacionn ventana = new EliminarInformacionn(conexion,new Validador());
+            ventana.setSize(800,600);
             ventana.setVisible(true);
         });
 
         editarProductoButton.addActionListener(e -> {
             EditarInformacionn ventana = new EditarInformacionn(conexion,new Validador());
+            ventana.setSize(800,600);
             ventana.setVisible(true);
         });
 
 
         agregarProductoButton.addActionListener(e -> {
             AnadirInformacionNuevoProduct ventana = new AnadirInformacionNuevoProduct(conexion, new Validador());
+            ventana.setSize(800,600);
             ventana.setVisible(true);
         });
     }
