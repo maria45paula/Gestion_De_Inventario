@@ -38,9 +38,7 @@ public class GestionEmpleado implements IGestorEmpleados {
 
         for (Empleado empleado : empleados) {
 
-            if (empleado.getUsuario().equals(usuario)
-                    && empleado.getContrasena().equals(contrasena)) {
-
+            if (empleado.getUsuario().equals(usuario) && empleado.getContrasena().equals(contrasena)) {
                 return true;
             }
 

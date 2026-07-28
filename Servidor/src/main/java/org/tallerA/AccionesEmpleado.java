@@ -136,7 +136,7 @@ public class AccionesEmpleado implements Runnable {
          gestorEmpleados.agregarEmpleado(usuario,contrasena);
 
         String ip = socket.getInetAddress().getHostAddress();
-        RegistradorDeAcciones.registrar("AGREGAR_EMPLEADO", ip, "registroEmpleado");
+        RegistradorDeAcciones.registrar("AGREGAREMPLEADO", ip, usuario);
 
         return "OK; " + "registrado exitosamente";
     }
@@ -236,7 +236,7 @@ public class AccionesEmpleado implements Runnable {
      */
     private String exportarAuditoria() {
         try {
-            ExportadorCSV.exportarAccionesEmpleados("auditoria.log", "auditoria.csv");
+            ExportadorCSV.exportarAccionesEmpleados("acciones.log", "auditoria.csv");
             String contenido = ExportadorCSV.leerArchivoPlano("auditoria.csv");
             return "OK;" + contenido;
         } catch (IOException e) {
