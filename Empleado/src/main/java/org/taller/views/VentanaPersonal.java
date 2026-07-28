@@ -75,30 +75,7 @@ public class VentanaPersonal extends JDialog {
         }
     }
 
-    /**
-     * Método para eliminar un empleado
-     * Le pide al usuario la ID y si es correcta la manda al servidor
-     */
-    private void eliminarEmpleado() {
-        String idTexto = JOptionPane.showInputDialog("Ingrese el ID del empleado a eliminar:");
-        if (idTexto == null) {
-            return;
-        }
-        try {
 
-            if (validador.validarInt(idTexto)) {
-                conexionCliente.enviarPeticion("ELIMINAR_EMPLEADO;" + idTexto + ";");
-                JOptionPane.showMessageDialog(null, "Solicitud enviada correctamente.");
-            } else {
-                Error_ error = new Error_();
-                error.setVisible(true);
-                JOptionPane.showMessageDialog(null, "El ID ingresado no es válido.");
-            }
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 }
 
 

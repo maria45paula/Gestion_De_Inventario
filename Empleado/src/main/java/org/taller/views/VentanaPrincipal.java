@@ -64,6 +64,8 @@ public class VentanaPrincipal extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Archivos archivos = new Archivos(conexionCliente);
+                archivos.setSize(400,400);
+                archivos.setLocationRelativeTo(null);
                 archivos.setVisible(true);
             }
         });
